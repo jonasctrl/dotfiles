@@ -8,12 +8,13 @@ return {
     explorer = { enabled = true },
     indent = {
       animate = {
-        style = "out",
-        easing = "linear",
-        duration = {
-          step = 0,
-          total = 0,
-        },
+        enabled = false,
+      },
+      scope = {
+        enabled = false,
+      },
+      chunk = {
+        enabled = false,
       },
     },
     picker = { enabled = true },
@@ -21,7 +22,7 @@ return {
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    scroll = { enabled = true },
+    scroll = { enabled = false },
     statuscolumn = { enabled = false },
     words = { enabled = true },
   },
