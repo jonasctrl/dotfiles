@@ -1,12 +1,8 @@
 return {
-    'nvim-lualine/lualine.nvim',
-    priority = 100,
-    dependencies = {'nvim-tree/nvim-web-devicons'},
-    config = function()
-        require('lualine').setup({
-            options = {
-                itheme = 'dracula'
-            }
-        })
-    end
+  'nvim-lualine/lualine.nvim',
+  priority = 1000,
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    require('lualine').setup()
+  end
 }
