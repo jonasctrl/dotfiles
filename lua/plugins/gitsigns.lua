@@ -1,86 +1,43 @@
-return { {
-  "lewis6991/gitsigns.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" }, -- Required dependency
-  config = function()
-    require("gitsigns").setup({
-      signs = {
-        add = {
-          text = "┃"
+return {
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup({
+        signs = {
+          add = { text = "┃" },
+          change = { text = "┃" },
+          delete = { text = "_" },
+          topdelete = { text = "‾" },
+          changedelete = { text = "~" },
+          untracked = { text = "┆" },
         },
-        change = {
-          text = "┃"
-        },
-        delete = {
-          text = "_"
-        },
-        topdelete = {
-          text = "‾"
-        },
-        changedelete = {
-          text = "~"
-        },
-        untracked = {
-          text = "┆"
-        }
-      },
-      signcolumn = true,       -- Show git signs in the sign column
-      numhl = false,           -- Disable line number highlighting
-      linehl = false,          -- Disable line highlighting
-      word_diff = false,       -- Disable word diff mode
+        current_line_blame = true,
+        current_line_blame_opts = { delay = 0 },
+        on_attach = function(bufnr)
+          local gs = require("gitsigns")
+          local map = function(mode, l, r, desc)
+            vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+          end
 
-      -- Always show inline git blame
-      current_line_blame = true,
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = "eol",         -- 'eol' | 'overlay' | 'right_align'
-        delay = 0,                     -- Show blame instantly
-        ignore_whitespace = false,
-        virt_text_priority = 100
-      },
-      current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
+          -- Navigation
+          map("n", "]c", function()
+            if vim.wo.diff then return "]c" end
+            vim.schedule(function() gs.nav_hunk("next") end)
+            return "<Ignore>"
+          end, "Next hunk")
 
-      -- Keybindings
-      on_attach = function(bufnr)
-        local gitsigns = require("gitsigns")
+          map("n", "[c", function()
+            if vim.wo.diff then return "[c" end
+            vim.schedule(function() gs.nav_hunk("prev") end)
+            return "<Ignore>"
+          end, "Prev hunk")
 
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
+          -- Actions
+          map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
+          map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+          map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle blame")
         end
-
-        -- Navigation
-        map("n", "]c", function()
-          if vim.wo.diff then
-            vim.cmd.normal({
-              "]c",
-              bang = true
-            })
-          else
-            gitsigns.nav_hunk("next")
-          end
-        end)
-
-        map("n", "[c", function()
-          if vim.wo.diff then
-            vim.cmd.normal({
-              "[c",
-              bang = true
-            })
-          else
-            gitsigns.nav_hunk("prev")
-          end
-        end)
-
-        map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-
-        vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "CursorHold" }, {
-          buffer = bufnr,
-          callback = function()
-            gitsigns.refresh()
-          end
-        })
-      end
-    })
-  end
-} }
+      })
+    end
+  }
+}
