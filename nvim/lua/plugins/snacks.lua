@@ -17,7 +17,16 @@ return {
         enabled = false,
       },
     },
-    picker = { enabled = true },
+    picker = {
+      sources = {
+        explorer = {
+          hidden = true, -- Show hidden files in explorer
+        },
+        files = {
+          hidden = true, -- Show hidden files in file picker
+        }
+      }
+    },
     input = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
