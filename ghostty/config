@@ -1,5 +1,13 @@
-font-family = MesloLGS Nerd Font Mono
-font-size = 12
+# Frosted glass effect
 background-opacity = 0.9
-theme = Wombat
-window-save-state = always
+background-blur-radius = 20
+
+window-padding-x = 12
+window-padding-y = 0
+window-padding-balance = true
+window-padding-color = extend
+macos-titlebar-style = transparent
+
+macos-titlebar-proxy-icon = hidden
+title = " "
+
