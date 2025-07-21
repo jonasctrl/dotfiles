@@ -1,5 +1,4 @@
-# Frosted glass effect
-background-opacity = 0.9
+background-opacity = 0.75
 background-blur-radius = 20
 
 window-padding-x = 12
@@ -11,3 +10,4 @@ macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 title = " "
 
+font-family = "JetBrainsMono Nerd Font"
