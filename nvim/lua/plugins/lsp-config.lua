@@ -6,7 +6,6 @@ return {
             require("mason").setup()
         end
     },
-
     -- Mason LSP Config
     {
         "williamboman/mason-lspconfig.nvim",
@@ -18,7 +17,6 @@ return {
             })
         end
     },
-
     -- Simple completion
     {
         "hrsh7th/nvim-cmp",
@@ -45,7 +43,6 @@ return {
             })
         end,
     },
-
     -- Modern formatting
     {
         "stevearc/conform.nvim",
@@ -57,11 +54,6 @@ return {
                     javascript = { "prettier" },
                     typescript = { "prettier" },
                     vue = { "prettier" },
-                    go = { "gofmt", "goimports" },
-                },
-                format_on_save = {
-                    lsp_fallback = true,
-                    timeout_ms = 1000,
                 },
             })
         end
@@ -80,13 +72,14 @@ return {
 
             local on_attach = function(client, bufnr)
                 local opts = { buffer = bufnr, silent = true }
-
                 -- Essential keymaps
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "<leader>f", function()
                     require("conform").format({ lsp_fallback = true })
                 end, opts)
                 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                -- F2 for fast renaming
+                vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
             end
 
             -- Setup servers
@@ -99,7 +92,18 @@ return {
                         },
                     },
                 },
-                gopls = {},
+                gopls = {
+                    settings = {
+                        gopls = {
+                            gofumpt = true,
+                            completeUnimported = true,
+                            usePlaceholders = true,
+                            analyses = {
+                                unusedparams = true,
+                            },
+                        },
+                    },
+                },
                 ts_ls = {},
                 pyright = {},
             }
@@ -110,6 +114,25 @@ return {
                     on_attach = on_attach,
                 }, config))
             end
+
+            -- Auto organize imports for Go on save
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = "*.go",
+                callback = function()
+                    local params = vim.lsp.util.make_range_params()
+                    params.context = { only = { "source.organizeImports" } }
+                    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+                    for cid, res in pairs(result or {}) do
+                        for _, r in pairs(res.result or {}) do
+                            if r.edit then
+                                local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                                vim.lsp.util.apply_workspace_edit(r.edit, enc)
+                            end
+                        end
+                    end
+                end,
+                group = vim.api.nvim_create_augroup("GoImports", { clear = true }),
+            })
         end,
     },
 }
