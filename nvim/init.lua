@@ -4,8 +4,8 @@ Snacks = Snacks
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system(
-    { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+    vim.fn.system(
+        { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -21,34 +21,34 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Diagnostic display
 vim.diagnostic.config({
-  virtual_text = {
-    enabled = true,
-    source = "if_many",
-    prefix = "",
-    spacing = 2,
+    virtual_text = {
+        enabled = true,
+        source = "if_many",
+        prefix = "",
+        spacing = 2,
+        severity_sort = true,
+        severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
+    },
+    signs = false,
+    underline = {
+        enabled = true,
+        severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
+    },
+    update_in_insert = false,
     severity_sort = true,
-    severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
-  },
-  signs = false,
-  underline = {
-    enabled = true,
-    severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
-  },
-  update_in_insert = false,
-  severity_sort = true,
-  float = {
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
-  },
+    float = {
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
 })
 
 vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", {
-  bg = "#472329",
-  fg = "#f87171"
+    bg = "#472329",
+    fg = "#f87171"
 })
 vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", {
-  bg = "#453411",
-  fg = "#fbbf24"
+    bg = "#453411",
+    fg = "#fbbf24"
 })
