@@ -22,6 +22,9 @@ return {
                     map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
                     map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
                     map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle blame")
+                    map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+                    map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+                    map("n", "<leader>hd", gs.diffthis, "Diff this")
                 end
             })
         end
