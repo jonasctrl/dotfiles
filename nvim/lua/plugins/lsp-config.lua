@@ -87,7 +87,7 @@ return {
                 -- Essential keymaps
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "<leader>f", function()
-                    require("conform").format({ lsp_fallback = true })
+                    require("conform").format({ lsp_fallback = true, async = true })
                 end, opts)
                 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                 -- F2 for fast renaming

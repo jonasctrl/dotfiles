@@ -56,3 +56,18 @@ vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", {
 -- Basic keymaps
 vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save" })
+
+-- save all buffers and quit
+vim.keymap.set("n", "<leader>Q", function()
+    local bufs = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(bufs) do
+        if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf,
+            "modified") then
+            vim.api.nvim_buf_call(buf, function()
+                vim.cmd("write")
+            end)
+        end
+    end
+    vim.cmd("quitall")
+end, { desc = "Save all and quit" })
+
