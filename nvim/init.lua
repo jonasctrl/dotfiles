@@ -52,3 +52,7 @@ vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", {
     bg = "#453411",
     fg = "#fbbf24"
 })
+
+-- Basic keymaps
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save" })

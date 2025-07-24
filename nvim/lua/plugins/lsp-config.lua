@@ -70,7 +70,7 @@ return {
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            local on_attach = function(client, bufnr)
+            local on_attach = function(_, bufnr)
                 local opts = { buffer = bufnr, silent = true }
                 -- Essential keymaps
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)

@@ -20,7 +20,6 @@ return {
             },
         })
 
-        -- Key mappings
         vim.keymap.set("n", "<leader>tt", function() neotest.run.run() end, { desc = "Run nearest test" })
         vim.keymap.set("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end,
             { desc = "Run current file tests" })

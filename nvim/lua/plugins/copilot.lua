@@ -10,8 +10,6 @@ return {
             hide_during_completion = vim.g.ai_cmp,
             keymap = {
                 accept = "<Tab>",
-                -- next = "<M-]>",
-                -- prev = "<M-[>",
             },
         },
         panel = { enabled = false },

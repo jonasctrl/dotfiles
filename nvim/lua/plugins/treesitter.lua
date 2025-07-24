@@ -16,7 +16,6 @@ return {
                 "vue",
                 "html",
                 "css",
-                "scss",
                 "json",
                 "python",
                 "go",
