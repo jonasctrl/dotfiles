@@ -6,9 +6,26 @@ return {
   },
   config = function()
     require("dap-go").setup()
-    require("dapui").setup()
 
-    -- Simple attach config
+    require("dapui").setup({
+      layouts = {
+        {
+          elements = {
+            {
+              id = "scopes",
+              size = 0.6,
+            },
+            {
+              id = "breakpoints",
+              size = 0.4,
+            },
+          },
+          size = 40,
+          position = "left",
+        },
+      },
+    })
+
     require("dap").configurations.go = vim.list_extend(require("dap").configurations.go, {
       {
         type = "delve",
@@ -22,8 +39,9 @@ return {
     })
   end,
   keys = {
-    { "<F5>",  function() require("dap").continue() end },
-    { "<F9>",  function() require("dap").toggle_breakpoint() end },
-    { "<F10>", function() require("dap").step_over() end },
-  },
+    { "<F5>",       function() require("dap").continue() end },
+    { "<F9>",       function() require("dap").toggle_breakpoint() end },
+    { "<F10>",      function() require("dap").step_over() end },
+    { "<leader>du", function() require("dapui").toggle() end,         desc = "Toggle DAP UI" },
+  }
 }

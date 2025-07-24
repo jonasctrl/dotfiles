@@ -52,7 +52,3 @@ vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", {
   bg = "#453411",
   fg = "#fbbf24"
 })
-
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })

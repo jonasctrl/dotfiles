@@ -72,19 +72,19 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "mason.nvim",
-      "mason-lspconfig.nvim", 
+      "mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      
+
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, silent = true }
-        
+
         -- Essential keymaps
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "<leader>f", function()
           require("conform").format({ lsp_fallback = true })
         end, opts)
