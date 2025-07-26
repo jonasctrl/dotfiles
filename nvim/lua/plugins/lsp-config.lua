@@ -8,7 +8,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "gopls", "ts_ls", "pyright" },
+        ensure_installed = { "lua_ls", "gopls", "ts_ls", "pyright", "marksman", "html", "bashls" },
         automatic_installation = true,
       })
     end,
@@ -22,16 +22,13 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
       local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
       end
-
       local mason_lspconfig = require("mason-lspconfig")
-
       if mason_lspconfig.setup_handlers then
         mason_lspconfig.setup_handlers({
           function(server_name)
@@ -42,7 +39,7 @@ return {
           end,
         })
       else
-        local servers = { "lua_ls", "gopls", "ts_ls", "pyright" }
+        local servers = { "lua_ls", "gopls", "ts_ls", "pyright", "marksman", "html", "cssls", "bashls" }
         for _, server in ipairs(servers) do
           lspconfig[server].setup({
             capabilities = capabilities,
@@ -83,11 +80,15 @@ return {
         lua = { "stylua" },
         typescript = { "prettier" },
         javascript = { "prettier" },
+        markdown = { "prettier" },
+        html = { "prettier" },
+        css = { "prettier" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
       },
     },
     config = function(_, opts)
       require("conform").setup(opts)
-
       vim.api.nvim_create_autocmd("BufWritePre", {
         callback = function(args)
           require("conform").format({ bufnr = args.buf })
