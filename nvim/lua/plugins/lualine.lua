@@ -1,8 +1,13 @@
 return {
-    'nvim-lualine/lualine.nvim',
-    priority = 1000,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-        require('lualine').setup()
-    end
+  'nvim-lualine/lualine.nvim',
+  priority = 1000,
+  config = function()
+    require('lualine').setup({
+      options = {
+        icons_enabled = true,
+        component_separators = '',
+        section_separators = '',
+      },
+    })
+  end,
 }
