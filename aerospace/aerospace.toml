@@ -58,6 +58,7 @@ automatically-unhide-macos-hidden-apps = true
 # App IDs are used to match applications.
 # osascript -e 'id of app "DBeaver"'
 
+# Then move certain apps (they'll still float)
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace 1']
@@ -82,10 +83,8 @@ if.window-title-regex-substring = '^DBeaver.*Universal Database'
 check-further-callbacks = true
 run = ['move-node-to-workspace 5']
 
-# Float ALL other DBeaver windows
-[[on-window-detected]]
-if.app-id = 'org.jkiss.dbeaver.core.product'
-run = ['layout floating']
+# Other DBeaver windows will already be floating (from global rule),
+# so you don't need a second floating rule here.
 
 [[on-window-detected]]
 if.app-id = 'com.postmanlabs.mac'

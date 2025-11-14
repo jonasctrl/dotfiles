@@ -6,6 +6,8 @@ return {
         "windwp/nvim-ts-autotag",
     },
     config = function()
+        -- Setup treesitter for various languages
+        -- Highlight, indentation, autotagging
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "lua",

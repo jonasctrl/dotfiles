@@ -26,5 +26,13 @@ return {
                 map("n", "<leader>hd", gs.diffthis, "Diff this")
             end
         })
+
+        -- Set highlight for current line blame
+        vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            callback = function()
+                vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
+            end
+        })
     end
 }

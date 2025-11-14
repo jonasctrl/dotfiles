@@ -15,7 +15,7 @@ return {
                     experimental = {
                         test_table = true,
                     },
-                    args = { "-count=1", "-timeout=60s" }
+                    args = { "-count=1", "-timeout=60s", "-parallel=1", "-race" },
                 }),
             },
         })

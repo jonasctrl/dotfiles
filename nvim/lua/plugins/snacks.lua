@@ -4,7 +4,7 @@ return {
     lazy = false,
     opts = {
         bigfile = { enabled = true },
-        dashboard = { enabled = true },
+        dashboard = { enabled = false },
         explorer = { enabled = true },
         indent = {
             animate = {
@@ -29,7 +29,7 @@ return {
                 }
             }
         },
-        input = { enabled = false}, -- should allow nvim input to be on top and nicer
+        input = { enabled = false }, -- should allow nvim input to be on top and nicer
         notifier = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },

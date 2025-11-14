@@ -48,10 +48,5 @@ vim.diagnostic.config({
   },
 })
 
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { bg = "#472329", fg = "#f87171" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { bg = "#453411", fg = "#fbbf24" })
-
-vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit", silent = true })
-vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save", silent = true })
-vim.keymap.set("n", "<leader>Q", "<cmd>wa | qa<CR>", { desc = "Save all and quit", silent = true })
-vim.keymap.set("n", "<leader>ss", "<cmd>set spell!<CR>", { desc = "Toggle spell checking", silent = true })
+-- exit terminal mode
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
