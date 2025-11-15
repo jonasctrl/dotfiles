@@ -1,11 +1,14 @@
 *
 
 !.gitignore
+
 !nvim/
-!zsh
-!tmux/tmux.conf
+!zsh/
 !aerospace/
 !ghostty/
+!tmux/
+
+!tmux/tmux.conf
 
 
 
