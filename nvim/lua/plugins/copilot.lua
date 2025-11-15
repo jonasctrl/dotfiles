@@ -14,8 +14,7 @@ return {
         },
         panel = { enabled = false },
         filetypes = {
-            markdown = true,
-            help = true,
+            ["*"] = true,
         },
     },
 }
