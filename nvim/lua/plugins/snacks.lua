@@ -18,6 +18,12 @@ return {
             },
         },
         picker = {
+            icons = {
+                files = {
+                    dir = "",
+                    dir_open = "",
+                },
+            },
             sources = {
                 explorer = {
                     hidden = true,
