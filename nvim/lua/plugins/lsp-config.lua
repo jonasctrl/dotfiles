@@ -28,16 +28,6 @@ return {
                 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
             end
 
-            -- Disable diagnostics and validation for SQL files
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "sql",
-                callback = function(args)
-                    vim.diagnostic.disable(args.buf)
-                    vim.lsp.stop_client(vim.lsp.get_active_clients({ bufnr = args.buf }))
-                    vim.bo[args.buf].syntax = "off"
-                end,
-            })
-
             local mason_lspconfig = require("mason-lspconfig")
 
             mason_lspconfig.setup({

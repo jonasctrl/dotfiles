@@ -9,9 +9,13 @@
 !tmux/
 
 !tmux/tmux.conf
+!nvim/**/*
+!zsh/**/*
+!aerospace/**/*
+!ghostty/**/*
 
-
-
+.DS_Store
+lazy-lock.json
 
 
 

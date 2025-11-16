@@ -19,11 +19,18 @@ vim.opt.rtp:prepend(lazypath)
 pcall(require, "vim-options")
 pcall(require("lazy").setup, "plugins")
 
+-- line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- misc
 vim.opt.spell = true
 vim.opt.clipboard = "unnamedplus"
+
+-- ui
+vim.opt.background = "dark"
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
 
 vim.diagnostic.config({
   virtual_text = {
