@@ -6,6 +6,11 @@ return {
         local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
         lualine.setup({
+            options = {
+                theme = "ayu_dark",
+                component_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
+            },
             icons_enabled = true,
             sections = {
                 lualine_x = {
@@ -13,6 +18,7 @@ return {
                         lazy_status.updates,
                         cond = lazy_status.has_updates,
                     },
+                    { "encoding" },
                     { "filetype" },
                 },
             },
