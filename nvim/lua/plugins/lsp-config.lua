@@ -1,56 +1,57 @@
 return {
+    -- Mason: Package manager for LSP servers
     {
         "williamboman/mason.nvim",
-        config = true,
+        opts = {},
     },
+
+    -- Mason-LSPConfig: Bridge between mason and lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim" },
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "gopls", "ts_ls", "pyright", "marksman", "html", "bashls", "tsgo" },
-                automatic_installation = true,
-            })
-        end,
+        opts = {
+            ensure_installed = {
+                "lua_ls",
+                "gopls",
+                "ts_ls",
+                "pyright",
+                "marksman",
+                "html",
+                "cssls",
+                "bashls",
+            },
+        },
     },
+
+    -- LSP Configuration
     {
         "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
-            "williamboman/mason.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local on_attach = function(_, bufnr)
-                local opts = { buffer = bufnr }
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-            end
 
-            local mason_lspconfig = require("mason-lspconfig")
-
-            mason_lspconfig.setup({
-                ensure_installed = { "lua_ls", "gopls", "tsgo", "pyright", "marksman", "html", "cssls", "bashls" },
-                automatic_installation = true,
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local opts = { buffer = args.buf }
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                end,
             })
 
-            if mason_lspconfig.setup_handlers then
-                mason_lspconfig.setup_handlers({
-                    function(server_name)
-                        if vim.lsp.configs[server_name] then
-                            vim.lsp.configs[server_name].setup({
-                                capabilities = capabilities,
-                                on_attach = on_attach,
-                            })
-                        else
-                            vim.notify("LSP server not found: " .. server_name, vim.log.levels.WARN)
-                        end
-                    end,
-                })
-            end
+            vim.lsp.config("*", {
+                capabilities = capabilities,
+            })
         end,
     },
+
+    -- Autocompletion
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -59,47 +60,62 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
         },
-        config = function()
+        opts = function()
             local cmp = require("cmp")
-            cmp.setup({
+            return {
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-n>"] = cmp.mapping.complete(),
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ["<Tab>"] = cmp.mapping.select_next_item(),
-                    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+                    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
-                sources = {
+                sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "buffer" },
                     { name = "path" },
-                },
-            })
+                }),
+            }
         end,
     },
+
+    -- Formatting
     {
         "stevearc/conform.nvim",
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        keys = {
+            {
+                "<leader>f",
+                function()
+                    require("conform").format({
+                        async = false,
+                        timeout_ms = 2000,
+                        lsp_format =
+                        "fallback"
+                    })
+                end,
+                desc = "Format buffer",
+            },
+        },
         opts = {
             formatters_by_ft = {
                 go = { "goimports", "gofmt" },
                 lua = { "stylua" },
                 typescript = { "prettier" },
                 javascript = { "prettier" },
+                typescriptreact = { "prettier" },
+                javascriptreact = { "prettier" },
                 html = { "prettier" },
                 css = { "prettier" },
+                json = { "prettier" },
+                markdown = { "prettier" },
                 sh = { "shfmt" },
                 bash = { "shfmt" },
             },
+            format_on_save = {
+                timeout_ms = 2000,
+                lsp_format = "fallback",
+            },
         },
-        config = function(_, opts)
-            require("conform").setup(opts)
-
-            vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end,
-                { desc = "Format buffer" })
-            vim.api.nvim_create_autocmd("BufWritePre",
-                { callback = function(args) require("conform").format({ bufnr = args.buf }) end,
-                })
-        end,
     },
 }

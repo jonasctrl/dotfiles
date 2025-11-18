@@ -41,7 +41,7 @@ return {
         scope = { enabled = true },
         scroll = { enabled = false },
         statuscolumn = { enabled = false },
-        words = { enabled = false }, 
+        words = { enabled = false },
     },
     keys = {
         -- Top Pickers & Explorer

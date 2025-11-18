@@ -37,12 +37,4 @@ return {
             })
         end
     },
-    {
-        'f-person/git-blame.nvim',
-        config = function()
-            vim.g.gitblame_enabled = 0
-            vim.api.nvim_set_keymap('n', '<leader>ho', ':GitBlameOpenCommitURL<CR>',
-                { noremap = true, silent = true, desc = "Open commit in browser" })
-        end
-    }
 }
