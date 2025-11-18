@@ -46,11 +46,11 @@ return {
             vim.api.nvim_set_hl(0, "@string.special", { fg = fg_hex })
             vim.api.nvim_set_hl(0, "@string.escape", { fg = fg_hex })
 
-            -- Any other purple-based highlights
-            vim.api.nvim_set_hl(0, "Identifier", { fg = fg_hex })
-            vim.api.nvim_set_hl(0, "@variable", { fg = fg_hex })
-            vim.api.nvim_set_hl(0, "@property", { fg = fg_hex })
-            vim.api.nvim_set_hl(0, "@field", { fg = fg_hex })
+            -- INVESTIGATE: Any other purple-based highlights
+            -- vim.api.nvim_set_hl(0, "Identifier", { fg = fg_hex })
+            -- vim.api.nvim_set_hl(0, "@variable", { fg = fg_hex })
+            -- vim.api.nvim_set_hl(0, "@property", { fg = fg_hex })
+            -- vim.api.nvim_set_hl(0, "@field", { fg = fg_hex })
         end
     end
 }
