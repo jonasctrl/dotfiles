@@ -1,20 +1,26 @@
 return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "BufReadPost",
-    opts = {
-        suggestion = {
-            enabled = not vim.g.ai_cmp,
-            auto_trigger = true,
-            hide_during_completion = vim.g.ai_cmp,
-            keymap = {
-                accept = "<C-l>",
+    event = "InsertEnter",
+    config = function()
+        require("copilot").setup({
+            suggestion = {
+                enabled = true,
+                auto_trigger = true,
+                keymap = {
+                    accept = "<C-l>",
+                },
             },
-        },
-        panel = { enabled = false },
-        filetypes = {
-            ["*"] = true,
-        },
-    },
+            panel = { enabled = false },
+            filetypes = {
+                yaml = true,
+                markdown = true,
+                help = false,
+                gitcommit = false,
+                gitrebase = false,
+                [".env"] = false,
+                ["*"] = true,
+            },
+        })
+    end,
 }

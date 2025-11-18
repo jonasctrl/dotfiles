@@ -1,22 +1,16 @@
 return {
     "folke/snacks.nvim",
-    priority = 1000,
+    priority = 900,
     lazy = false,
+    ---@diagnostic disable-next-line: undefined-doc-name
+    ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
         dashboard = { enabled = false },
         explorer = { enabled = true },
-        indent = {
-            animate = {
-                enabled = false,
-            },
-            scope = {
-                enabled = false,
-            },
-            chunk = {
-                enabled = false,
-            },
-        },
+        indent = { enabled = false },
+        input = { enabled = false },
+        notifier = { enabled = true },
         picker = {
             icons = {
                 files = {
@@ -32,11 +26,9 @@ return {
                 files = {
                     hidden = true,
                     ignored = true,
-                }
-            }
+                },
+            },
         },
-        input = { enabled = false },
-        notifier = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
         scroll = { enabled = false },

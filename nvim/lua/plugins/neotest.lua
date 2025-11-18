@@ -1,5 +1,7 @@
+-- NOTE: Helps in running and managing tests.
 return {
     "nvim-neotest/neotest",
+    enabled = false,
     dependencies = {
         "nvim-neotest/nvim-nio",
         "nvim-lua/plenary.nvim",
