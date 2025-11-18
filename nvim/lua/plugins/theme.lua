@@ -18,7 +18,7 @@ return {
             require("classic_monokai").setup()
             vim.cmd.colorscheme("classic-monokai")
 
-            -- Disable pane borders by matching background
+            -- HACK: Disable pane borders by matching background
             local bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
             if bg then
                 local bg_hex = string.format("#%06x", bg)

@@ -63,7 +63,7 @@ return {
             local cmp = require("cmp")
             cmp.setup({
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-n>"] = cmp.mapping.complete(), 
+                    ["<C-n>"] = cmp.mapping.complete(),
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
                     ["<Tab>"] = cmp.mapping.select_next_item(),
@@ -95,17 +95,11 @@ return {
         config = function(_, opts)
             require("conform").setup(opts)
 
-            -- format code shortcut
-            vim.keymap.set("n", "<leader>f", function()
-                vim.lsp.buf.format({ async = true })
-            end, { desc = "Format buffer" })
-
-            -- format on save
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                callback = function(args)
-                    require("conform").format({ bufnr = args.buf })
-                end,
-            })
+            vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end,
+                { desc = "Format buffer" })
+            vim.api.nvim_create_autocmd("BufWritePre",
+                { callback = function(args) require("conform").format({ bufnr = args.buf }) end,
+                })
         end,
     },
 }

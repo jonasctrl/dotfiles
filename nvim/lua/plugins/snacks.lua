@@ -35,13 +35,13 @@ return {
                 }
             }
         },
-        input = { enabled = false }, -- should allow nvim input to be on top and nicer
+        input = { enabled = false },
         notifier = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
         scroll = { enabled = false },
         statuscolumn = { enabled = false },
-        words = { enabled = false }, -- should show lsp references
+        words = { enabled = false }, 
     },
     keys = {
         -- Top Pickers & Explorer
