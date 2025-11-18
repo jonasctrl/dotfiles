@@ -1,11 +1,11 @@
 return {
-    -- Mason: Package manager for LSP servers
+    -- Mason is package manager for LSP servers
     {
         "williamboman/mason.nvim",
         opts = {},
     },
 
-    -- Mason-LSPConfig: Bridge between mason and lspconfig
+    -- Mason-LSPConfig is bridge between mason and lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim" },

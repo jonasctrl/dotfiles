@@ -50,7 +50,7 @@ return {
                     enable = true,
                     disable = { "python" },
                 },
-                -- NOTE: This requires nvim-ts-autotag
+                -- This requires nvim-ts-autotag
                 autotag = {
                     enable = true,
                     enable_close_on_slash = false,
@@ -59,7 +59,7 @@ return {
         end,
     },
 
-    -- NOTE: Show code context at the top of the window
+    -- Show code context at the top of the window
     {
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = { "nvim-treesitter/nvim-treesitter" },

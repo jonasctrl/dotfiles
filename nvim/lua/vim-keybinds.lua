@@ -1,5 +1,5 @@
--- NOTE: Disable native bindings
+-- Disable bindings
 vim.keymap.set("n", "q:", "<nop>")
 
--- NOTE: Global keybindings
+-- Global keybindings
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })

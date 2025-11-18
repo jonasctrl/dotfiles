@@ -1,5 +1,3 @@
-_G.Snacks = {}
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 ---@diagnostic disable-next-line: undefined-field
 if not vim.loop.fs_stat(lazypath) then
@@ -17,4 +15,5 @@ vim.opt.rtp:prepend(lazypath)
 
 pcall(require, "vim-keybinds")
 pcall(require, "vim-options")
+pcall(require, "vim-diagnostic")
 pcall(require("lazy").setup, "plugins")
