@@ -40,17 +40,6 @@ return {
             vim.api.nvim_set_hl(0, "SnacksPickerMatch", { fg = fg_hex, bold = true })
             vim.api.nvim_set_hl(0, "SnacksNotifierInfo", { fg = fg_hex })
             vim.api.nvim_set_hl(0, "SnacksNotifierIconInfo", { fg = fg_hex })
-
-            -- Search/match highlights - keep visible but not purple
-            vim.api.nvim_set_hl(0, "Special", { fg = fg_hex, bold = true })
-            vim.api.nvim_set_hl(0, "@string.special", { fg = fg_hex })
-            vim.api.nvim_set_hl(0, "@string.escape", { fg = fg_hex })
-
-            -- INVESTIGATE: Any other purple-based highlights
-            -- vim.api.nvim_set_hl(0, "Identifier", { fg = fg_hex })
-            -- vim.api.nvim_set_hl(0, "@variable", { fg = fg_hex })
-            -- vim.api.nvim_set_hl(0, "@property", { fg = fg_hex })
-            -- vim.api.nvim_set_hl(0, "@field", { fg = fg_hex })
         end
     end
 }

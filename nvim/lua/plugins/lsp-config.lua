@@ -114,10 +114,14 @@ return {
                 sh = { "shfmt" },
                 bash = { "shfmt" },
             },
-            format_on_save = {
-                timeout_ms = 2000,
-                lsp_format = "fallback",
-            },
+            format_on_save = function(bufnr)
+                -- Disable autoformat for certain filetypes
+                local disable_filetypes = { "markdown" }
+                if vim.tbl_contains(disable_filetypes, vim.bo[bufnr].filetype) then
+                    return
+                end
+                return { timeout_ms = 2000, lsp_format = "fallback" }
+            end,
         },
     },
 }
