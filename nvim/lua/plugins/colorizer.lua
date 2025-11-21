@@ -1,7 +1,7 @@
 -- NOTE: Plugin that allows color codes to be highlighted in the editor
 return {
     "norcalli/nvim-colorizer.lua",
-    enabled = false,
+    enabled = true,
     event = "VeryLazy",
     config = function()
         require("colorizer").setup({

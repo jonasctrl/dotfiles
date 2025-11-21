@@ -21,8 +21,9 @@ return {
             local fg_hex = string.format("#%06x", fg)
 
             -- Directories
-            vim.api.nvim_set_hl(0, "Directory", { fg = fg_hex })
-            vim.api.nvim_set_hl(0, "SnacksPickerDirectory", { fg = fg_hex })
+            dir_hex = "#FAB387"
+            vim.api.nvim_set_hl(0, "Directory", { fg = dir_hex })
+            vim.api.nvim_set_hl(0, "SnacksPickerDirectory", { fg = dir_hex })
 
             -- Replace purple highlights with neutral colors
             vim.api.nvim_set_hl(0, "Constant", { fg = fg_hex })
