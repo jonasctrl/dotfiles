@@ -23,10 +23,8 @@ setopt COMPLETE_ALIASES
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
 
-export NVM_DIR="$HOME/.nvm"
-load_nvm() { [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; }
-alias node="load_nvm; node"
-alias npm="load_nvm; npm"
-alias npx="load_nvm; npx"
-
 alias reload="source ~/.zshrc"
+
+export NVM_DIR=”$HOME/.nvm” 
+
+[ -s “$HOMEBREW_PREFIX/opt/nvm/nvm.sh” ] && . “$HOMEBREW_PREFIX/opt/nvm/nvm.sh”
