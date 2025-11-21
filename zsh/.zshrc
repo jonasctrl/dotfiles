@@ -1,30 +1,35 @@
-autoload -Uz vcs_info
-
+# Git integration
+autoload -Uz vcs_info add-zsh-hook
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats '%F{cyan}(%F{red}%b%F{cyan})%f'
 
 precmd() { vcs_info }
-
 setopt prompt_subst
-
 PROMPT='%F{cyan}%~%f ${vcs_info_msg_0_} '
 
+# History
 HISTSIZE=10000
 SAVEHIST=10000
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_SAVE_NO_DUPS
-setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS SHARE_HISTORY
 
+# Optimized completion
 autoload -Uz compinit
-compinit -C
-setopt COMPLETE_ALIASES
-setopt COMPLETE_IN_WORD
-setopt ALWAYS_TO_END
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+setopt COMPLETE_ALIASES COMPLETE_IN_WORD ALWAYS_TO_END
 
 alias reload="source ~/.zshrc"
 
-export NVM_DIR=”$HOME/.nvm” 
+# Lazy-load NVM 
+nvm() {
+  unset -f nvm node npm npx
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+  nvm "$@"
+}
 
-[ -s “$HOMEBREW_PREFIX/opt/nvm/nvm.sh” ] && . “$HOMEBREW_PREFIX/opt/nvm/nvm.sh”
+node() { nvm; node "$@"; }
+npm() { nvm; npm "$@"; }
+npx() { nvm; npx "$@"; }
