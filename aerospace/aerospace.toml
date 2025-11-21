@@ -5,7 +5,7 @@ after-login-command = []
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -58,7 +58,6 @@ automatically-unhide-macos-hidden-apps = true
 # App IDs are used to match applications.
 # osascript -e 'id of app "DBeaver"'
 
-# Then move certain apps (they'll still float)
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace 1']
@@ -75,16 +74,12 @@ run = ['move-node-to-workspace 2']
 if.app-id = 'com.microsoft.VSCode'
 run = ['move-node-to-workspace 3']
 
-# Move main DBeaver window to workspace 5 on startup
 [[on-window-detected]]
 if.app-id = 'org.jkiss.dbeaver.core.product'
 if.during-aerospace-startup = true
 if.window-title-regex-substring = '^DBeaver.*Universal Database'
 check-further-callbacks = true
 run = ['move-node-to-workspace 5']
-
-# Other DBeaver windows will already be floating (from global rule),
-# so you don't need a second floating rule here.
 
 [[on-window-detected]]
 if.app-id = 'com.postmanlabs.mac'
