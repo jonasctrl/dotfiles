@@ -14,8 +14,7 @@ return {
             vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_hex, bg = bg_hex })
         end
 
-        -- HACK: Visual theme tweaks for Snacks.nvim to reduce purple and improve readability
-        -- Customize directory/folder colors and replace purple with neutral whitish (VS Code-like)
+        -- HACK: Visual theme tweaks for Snacks.nvim to reduce purple color and improve readability
         local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
         if fg then
             local fg_hex = string.format("#%06x", fg)

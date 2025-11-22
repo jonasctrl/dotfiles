@@ -1,3 +1,5 @@
+source ~/.zshenv
+
 # Git integration
 autoload -Uz vcs_info add-zsh-hook
 zstyle ':vcs_info:*' enable git
@@ -33,3 +35,9 @@ nvm() {
 node() { nvm; node "$@"; }
 npm() { nvm; npm "$@"; }
 npx() { nvm; npx "$@"; }
+
+alias ls='ls --color=auto'
+alias ll='ls -lah --color=auto'
+alias grep='grep --color=auto'
+
+
