@@ -20,7 +20,7 @@ return {
             local fg_hex = string.format("#%06x", fg)
 
             -- Directories
-            dir_hex = "#FAB387"
+            dir_hex = "#ffd67d"
             vim.api.nvim_set_hl(0, "Directory", { fg = dir_hex })
             vim.api.nvim_set_hl(0, "SnacksPickerDirectory", { fg = dir_hex })
 
