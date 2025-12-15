@@ -1,9 +1,10 @@
 source ~/.zshenv
 
-# Git integration
+# Git
 autoload -Uz vcs_info add-zsh-hook
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats '%F{cyan}(%F{red}%b%F{cyan})%f'
+zstyle ':vcs_info:git:*' actionformats '%F{cyan}(%F{yellow}%b%F{cyan})%f'
 
 precmd() { vcs_info }
 setopt prompt_subst
@@ -14,7 +15,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS SHARE_HISTORY
 
-# Optimized completion
+# Completion
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
   compinit
@@ -40,4 +41,8 @@ alias ls='ls --color=auto'
 alias ll='ls -lah --color=auto'
 alias grep='grep --color=auto'
 
-
+# Optional Settings
+ENV_PRIVATE_PATH="$HOME/.config/zsh/.zshenv_private"
+if [ -f "$ENV_PRIVATE_PATH" ]; then
+    source "$ENV_PRIVATE_PATH"
+fi

@@ -1,5 +1,4 @@
 export XDG_CONFIG_HOME="$HOME/.config"
-export ZSH="$HOME/.oh-my-zsh"
 export NVM_DIR="$HOME/.nvm"
 
 export PATH=$PATH:/usr/local/go
