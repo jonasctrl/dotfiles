@@ -7,7 +7,7 @@ return {
     opts = {
         bigfile = { enabled = true },
         dashboard = {
-            enabled = true,
+            enabled = false,
             sections = {
                 { section = "header" },
                 { section = "startup" },
