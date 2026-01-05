@@ -7,15 +7,14 @@
 !aerospace/
 !ghostty/
 !tmux/
-!rectangle/
 
 !tmux/tmux.conf
 !nvim/**/*
 !aerospace/**/*
 !ghostty/**/*
 !zsh/**/*
-!rectangle/**/*
 zsh/.zshenv_private
+zsh/plugins/*
 
 lazy-lock.json
 .DS_Store
