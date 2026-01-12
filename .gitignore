@@ -12,9 +12,8 @@
 !nvim/**/*
 !aerospace/**/*
 !ghostty/**/*
-!zsh/**/*
-zsh/.zshenv_private
-zsh/plugins/*
+!zsh/.zshenv
+!zsh/.zshrc
 
 lazy-lock.json
 .DS_Store
