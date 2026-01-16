@@ -1,7 +1,51 @@
 return {
     "folke/snacks.nvim",
-    priority = 900,
+    priority = 1000,
     lazy = false,
+    init = function()
+        -- Monkey-patch snacks explorer tree for natural sorting
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            once = true,
+            callback = function()
+                local ok, Tree = pcall(require, "snacks.explorer.tree")
+                if not ok then return end
+
+                -- Natural sort comparator
+                local function natural_compare(a, b)
+                    local function pad_numbers(s)
+                        return s:gsub("(%d+)", function(n) return ("%010d"):format(tonumber(n)) end)
+                    end
+                    return pad_numbers(a) < pad_numbers(b)
+                end
+
+                -- Override the walk function to use natural sort
+                local _original_walk = Tree.walk
+                Tree.walk = function(self, node, fn, opts)
+                    local abort = fn(node)
+                    if abort ~= nil then return abort end
+
+                    local children = vim.tbl_values(node.children)
+                    table.sort(children, function(a, b)
+                        if a.dir ~= b.dir then return a.dir end
+                        return natural_compare(a.name, b.name)
+                    end)
+
+                    for c, child in ipairs(children) do
+                        child.last = c == #children
+                        abort = false
+                        if child.dir and (child.open or (opts and opts.all)) then
+                            abort = self:walk(child, fn, opts)
+                        else
+                            abort = fn(child)
+                        end
+                        if abort then return true end
+                    end
+                    return false
+                end
+            end,
+        })
+    end,
     ---@diagnostic disable-next-line: undefined-doc-name
     ---@type snacks.Config
     opts = {
@@ -14,9 +58,15 @@ return {
             },
         },
         explorer = { enabled = true },
-        indent = { enabled = false },
+        indent = {
+            enabled = true,
+            animate = { enabled = false },
+        },
         input = { enabled = false },
-        notifier = { enabled = true },
+        notifier = {
+            enabled = true,
+            style = "minimal",
+        },
         picker = {
             sources = {
                 explorer = {
@@ -71,7 +121,6 @@ return {
         { '<leader>s"',      function() Snacks.picker.registers() end,                               desc = "Registers" },
         { '<leader>s/',      function() Snacks.picker.search_history() end,                          desc = "Search History" },
         -- { "<leader>sa",      function() Snacks.picker.autocmds() end,                                desc = "Autocmds" },
-        { "<leader>sb",      function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
         -- { "<leader>sc",      function() Snacks.picker.command_history() end,                         desc = "Command History" },
         -- { "<leader>sC",      function() Snacks.picker.commands() end,                                desc = "Commands" },
         { "<leader>sd",      function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },

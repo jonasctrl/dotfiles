@@ -1,11 +1,13 @@
 HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
 
-HISTSIZE=10000
-SAVEHIST=10000
-setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS SHARE_HISTORY
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS SHARE_HISTORY INC_APPEND_HISTORY EXTENDED_HISTORY
 
 # Plugins
-source ${(q-)HOME}/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+source ${HOME}/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Completion 
 autoload -Uz compinit
@@ -30,14 +32,14 @@ setopt prompt_subst
 PROMPT='%F{cyan}%~%f ${vcs_info_msg_0_} '
 
 # Lazy-load NVM
-nvm() {
-  unset -f nvm node npm npx
+_load_nvm() {
+  unset -f nvm node npm npx _load_nvm
   [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-  nvm "$@"
 }
-node() { nvm; node "$@"; }
-npm() { nvm; npm "$@"; }
-npx() { nvm; npx "$@"; }
+nvm() { _load_nvm; nvm "$@"; }
+node() { _load_nvm; node "$@"; }
+npm() { _load_nvm; npm "$@"; }
+npx() { _load_nvm; npx "$@"; }
 
 # Aliases
 alias reload="exec zsh"
@@ -49,3 +51,6 @@ alias glog='git log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit'
 
 # Zoxide 
 eval "$(zoxide init zsh)"
+
+# Rebind autosuggestions (required with MANUAL_REBIND)
+_zsh_autosuggest_bind_widgets

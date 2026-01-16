@@ -1,13 +1,19 @@
 -- NOTE: Plugin that allows color codes to be highlighted in the editor
 return {
-    "norcalli/nvim-colorizer.lua",
-    enabled = true,
-    event = "VeryLazy",
-    config = function()
-        require("colorizer").setup({
-            "*",
-            css = { rgb_fn = true },
-            html = { names = false },
-        })
-    end,
+    "NvChad/nvim-colorizer.lua", -- Maintained fork of norcalli/nvim-colorizer.lua
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+        filetypes = { "*" },
+        user_default_options = {
+            RGB = true,
+            RRGGBB = true,
+            names = false,
+            RRGGBBAA = true,
+            rgb_fn = true,
+            hsl_fn = true,
+            css = true,
+            css_fn = true,
+            mode = "background",
+        },
+    },
 }

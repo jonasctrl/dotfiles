@@ -65,15 +65,25 @@ return {
         opts = function()
             local cmp = require("cmp")
             return {
+                snippet = {
+                    expand = function(args)
+                        vim.snippet.expand(args.body) -- Native Neovim 0.10+ snippets
+                    end,
+                },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
                     ["<Tab>"] = cmp.mapping.confirm({ select = true }),
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-e>"] = cmp.mapping.abort(),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "buffer" },
+                }, {
+                    { name = "buffer", keyword_length = 3 },
                     { name = "path" },
                 }),
             }
@@ -89,13 +99,9 @@ return {
             {
                 "<leader>f",
                 function()
-                    require("conform").format({
-                        async = false,
-                        timeout_ms = 2000,
-                        lsp_format =
-                        "fallback"
-                    })
+                    require("conform").format({ async = true })
                 end,
+                mode = "",
                 desc = "Format buffer",
             },
         },
@@ -103,25 +109,32 @@ return {
             formatters_by_ft = {
                 go = { "goimports", "gofmt" },
                 lua = { "stylua" },
-                typescript = { "prettier" },
-                javascript = { "prettier" },
-                typescriptreact = { "prettier" },
-                javascriptreact = { "prettier" },
-                html = { "prettier" },
-                css = { "prettier" },
-                json = { "prettier" },
-                markdown = { "prettier" },
+                typescript = { "prettierd", "prettier", stop_after_first = true },
+                javascript = { "prettierd", "prettier", stop_after_first = true },
+                typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+                javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+                html = { "prettierd", "prettier", stop_after_first = true },
+                css = { "prettierd", "prettier", stop_after_first = true },
+                json = { "prettierd", "prettier", stop_after_first = true },
+                yaml = { "prettierd", "prettier", stop_after_first = true },
+                markdown = { "prettierd", "prettier", stop_after_first = true },
                 sh = { "shfmt" },
                 bash = { "shfmt" },
             },
+            default_format_opts = {
+                lsp_format = "fallback",
+            },
             format_on_save = function(bufnr)
-                -- Disable autoformat for certain filetypes
                 local disable_filetypes = { "markdown" }
                 if vim.tbl_contains(disable_filetypes, vim.bo[bufnr].filetype) then
                     return
                 end
-                return { timeout_ms = 2000, lsp_format = "fallback" }
+                return { timeout_ms = 500 }
             end,
+            notify_on_error = true,
         },
+        init = function()
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        end,
     },
 }

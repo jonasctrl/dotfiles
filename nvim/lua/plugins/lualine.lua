@@ -8,10 +8,10 @@ return {
         lualine.setup({
             options = {
                 theme = "ayu_dark",
+                icons_enabled = true,
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = '' },
             },
-            icons_enabled = true,
             sections = {
                 lualine_x = {
                     {
@@ -19,7 +19,7 @@ return {
                         cond = lazy_status.has_updates,
                     },
                     { "encoding" },
-                    { "filetype" },
+                    { "filetype", icon_only = false, icons_enabled = false },
                 },
             },
         })

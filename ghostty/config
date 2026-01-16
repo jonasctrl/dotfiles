@@ -11,10 +11,25 @@ macos-titlebar-proxy-icon = hidden
 title = " "
 
 font-family = "MesloLGS Nerd Font Mono"
+font-size = 14
+
+macos-option-as-alt = true
 
 cursor-color = cell-foreground
 cursor-style-blink = false
 
+# Experimental:
 # Clipboard (important for nvim/tmux OSC 52)
 clipboard-write = allow
 clipboard-read = ask
+
+# Readability with transparency
+minimum-contrast = 1.1
+
+# Shell integration
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
+
+# Quality of life
+confirm-close-surface = false
+mouse-hide-while-typing = true
