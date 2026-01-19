@@ -2,12 +2,15 @@ return {
     -- Mason is package manager for LSP servers
     {
         "williamboman/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+        build = ":MasonUpdate",
         opts = {},
     },
 
     -- Mason-LSPConfig is bridge between mason and lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = { "williamboman/mason.nvim" },
         opts = {
             ensure_installed = {
@@ -23,7 +26,7 @@ return {
         },
     },
 
-    -- LSP Configuration
+    -- LSP Configuration (Neovim 0.11+ native API)
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -34,22 +37,23 @@ return {
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+            -- LspAttach keymaps
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local opts = { buffer = args.buf }
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-                    -- Snacks integrated LSP keymaps
-                    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                 end,
             })
 
+            -- Set global LSP defaults (Neovim 0.11+)
             vim.lsp.config("*", {
                 capabilities = capabilities,
             })
+
+            -- mason-lspconfig's automatic_enable (default: true)
+            -- will call vim.lsp.enable() for all installed servers
         end,
     },
 

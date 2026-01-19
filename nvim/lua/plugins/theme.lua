@@ -70,28 +70,31 @@ return {
             vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#5a5a5a" })
         end
 
+        -- Gitsigns blame - subtle
+        vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
+
         -- Floating window aesthetics
         -- vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#5a5a5a", bg = bg_hex })
         -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg_hex })
         -- vim.api.nvim_set_hl(0, "FloatTitle", { fg = "#e6a852", bg = bg_hex, bold = true })
 
         -- Diagnostic colors - subtle but visible
-        vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" })
-        vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#e5c07b" })
-        vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#61afef" })
-        vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#98c379" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#e5c07b" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#61afef" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#98c379" })
 
         -- Diagnostic underlines - less intrusive
-        vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "#e06c75" })
-        vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "#e5c07b" })
-        vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "#61afef" })
-        vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "#98c379" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "#e06c75" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "#e5c07b" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "#61afef" })
+        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "#98c379" })
 
         -- Virtual text diagnostics - softer colors
-        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#7a4a4d", italic = true })
-        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#7a6d47", italic = true })
-        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#3d5a6d", italic = true })
-        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#4d6449", italic = true })
+        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#7a4a4d", italic = true })
+        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#7a6d47", italic = true })
+        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#3d5a6d", italic = true })
+        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#4d6449", italic = true })
 
         -- Search and visual selection - better aesthetics
         -- vim.api.nvim_set_hl(0, "Search", { bg = "#4a4a3a", fg = "#e6a852" })

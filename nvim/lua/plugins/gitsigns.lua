@@ -12,7 +12,7 @@ return {
                 untracked = { text = "┆" },
             },
             current_line_blame = true,
-            current_line_blame_opts = { delay = 0 },
+            current_line_blame_opts = { delay = 100 },
             on_attach = function(bufnr)
                 local gs = require("gitsigns")
                 local map = function(mode, l, r, desc)
@@ -34,31 +34,16 @@ return {
                 map("n", "<leader>hd", gs.diffthis, "Diff this")
                 map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff against ~")
                 map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle blame")
-
-                -- HACK: Custom mapping to open the commit in browser using snacks.nvim
+                -- Open blame commit in browser (uses gitsigns blame data)
                 map("n", "<leader>ho", function()
-                    local line = vim.api.nvim_win_get_cursor(0)[1]
-                    local cmd = string.format('git blame -L %d,%d --porcelain %s',
-                        line, line,
-                        vim.fn.shellescape(vim.fn.expand('%')))
-                    local output = vim.fn.system(cmd)
-                    local commit = output:match("^(%x+)")
-
-                    if commit and commit ~= "" and commit ~= "0000000000000000000000000000000000000000" then
-                        require("snacks").gitbrowse({ commit = commit })
+                    local blame = vim.b.gitsigns_blame_line_dict
+                    if blame and blame.sha and blame.sha ~= string.rep("0", 40) then
+                        Snacks.gitbrowse({ what = "commit", commit = blame.sha })
                     else
                         vim.notify("No commit found for this line", vim.log.levels.WARN)
                     end
                 end, "Open commit in browser")
             end
         })
-
-        -- HACK: This is to ensure the highlight for current line blame is set correctly
-        vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
-        vim.api.nvim_create_autocmd("ColorScheme", {
-            callback = function()
-                vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
-            end
-        })
-    end
+    end,
 }

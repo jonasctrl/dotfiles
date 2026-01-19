@@ -1,3 +1,6 @@
+-- Enable Lua module caching (Neovim 0.9+)
+vim.loader.enable()
+
 -- Set leader key before lazy.nvim loads
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -38,14 +41,13 @@ require("lazy").setup({
     performance = {
         rtp = {
             disabled_plugins = {
-                "gzip",
-                "matchit",
-                "matchparen",
-                "netrwPlugin",
-                "tarPlugin",
                 "tohtml",
                 "tutor",
-                "zipPlugin",
+                "2html_plugin",
+                "getscript",
+                "getscriptPlugin",
+                "vimball",
+                "vimballPlugin",
             },
         },
     },

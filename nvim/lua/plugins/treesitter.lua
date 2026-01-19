@@ -34,7 +34,7 @@ return {
                 auto_install = true,
                 highlight = {
                     enable = true,
-                    disable = function(_lang, buf)
+                    disable = function(_, buf)
                         local max_filesize = 1024 * 1024
                         ---@diagnostic disable-next-line: undefined-field
                         local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))

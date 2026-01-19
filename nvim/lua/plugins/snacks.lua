@@ -3,6 +3,7 @@ return {
     priority = 1000,
     lazy = false,
     init = function()
+        -- HACK: Custom explorer order
         -- Monkey-patch snacks explorer tree for natural sorting
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
@@ -20,7 +21,6 @@ return {
                 end
 
                 -- Override the walk function to use natural sort
-                local _original_walk = Tree.walk
                 Tree.walk = function(self, node, fn, opts)
                     local abort = fn(node)
                     if abort ~= nil then return abort end
