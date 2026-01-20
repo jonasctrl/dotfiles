@@ -43,6 +43,15 @@ return {
                     end
                     return false
                 end
+
+                -- HACK: Force Snacks.input to use native command line
+                -- Monkey-patch snacks input module
+                local snacks_input = require("snacks.input")
+                snacks_input.input = function(opts, on_confirm)
+                    local prompt = opts.prompt or ""
+                    local default = opts.default or ""
+                    vim.ui.input({ prompt = prompt, default = default }, on_confirm)
+                end
             end,
         })
     end,

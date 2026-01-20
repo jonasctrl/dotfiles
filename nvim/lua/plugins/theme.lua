@@ -9,12 +9,9 @@ return {
         -- HACK: Disable pane borders by matching background
         local bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
         local bg_hex = bg and string.format("#%06x", bg) or "#1e1e1e"
+
         vim.api.nvim_set_hl(0, "VertSplit", { fg = bg_hex, bg = bg_hex })
         vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_hex, bg = bg_hex })
-
-        -- Subtle cursorline for better aesthetics
-        vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2d2a2e" })
-        -- vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#e6a852", bold = true })
 
         -- HACK: Visual theme tweaks for Snacks.nvim to reduce purple color and improve readability
         local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
@@ -72,40 +69,5 @@ return {
 
         -- Gitsigns blame - subtle
         vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
-
-        -- Floating window aesthetics
-        -- vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#5a5a5a", bg = bg_hex })
-        -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg_hex })
-        -- vim.api.nvim_set_hl(0, "FloatTitle", { fg = "#e6a852", bg = bg_hex, bold = true })
-
-        -- Diagnostic colors - subtle but visible
-        -- vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#e06c75" })
-        -- vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#e5c07b" })
-        -- vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#61afef" })
-        -- vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#98c379" })
-
-        -- Diagnostic underlines - less intrusive
-        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "#e06c75" })
-        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "#e5c07b" })
-        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "#61afef" })
-        -- vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "#98c379" })
-
-        -- Virtual text diagnostics - softer colors
-        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#7a4a4d", italic = true })
-        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#7a6d47", italic = true })
-        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#3d5a6d", italic = true })
-        -- vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#4d6449", italic = true })
-
-        -- Search and visual selection - better aesthetics
-        -- vim.api.nvim_set_hl(0, "Search", { bg = "#4a4a3a", fg = "#e6a852" })
-        -- vim.api.nvim_set_hl(0, "IncSearch", { bg = "#e6a852", fg = "#1e1e1e", bold = true })
-        -- vim.api.nvim_set_hl(0, "Visual", { bg = "#3e3d42" })
-        -- vim.api.nvim_set_hl(0, "VisualNOS", { bg = "#3e3d42" })
-
-        -- Better popup menu (completion menu) aesthetics
-        -- vim.api.nvim_set_hl(0, "Pmenu", { bg = "#2d2a2e", fg = "#d4d4d4" })
-        -- vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#3e3d42", fg = "#e6a852", bold = true })
-        -- vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "#3e3d42" })
-        -- vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#5a5a5a" })
     end
 }
