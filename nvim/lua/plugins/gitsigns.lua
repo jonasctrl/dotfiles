@@ -34,6 +34,7 @@ return {
                 map("n", "<leader>hd", gs.diffthis, "Diff this")
                 map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff against ~")
                 map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle blame")
+
                 -- Open blame commit in browser (uses gitsigns blame data)
                 map("n", "<leader>ho", function()
                     local blame = vim.b.gitsigns_blame_line_dict

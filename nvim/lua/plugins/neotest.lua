@@ -1,4 +1,3 @@
--- NOTE: Helps in running and managing tests.
 return {
     "nvim-neotest/neotest",
     dependencies = {
