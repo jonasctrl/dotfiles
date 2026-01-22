@@ -6,12 +6,23 @@ return {
         require("classic_monokai").setup()
         vim.cmd.colorscheme("classic-monokai")
 
-        -- HACK: Disable pane borders by matching background
-        local bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
-        local bg_hex = bg and string.format("#%06x", bg) or "#1e1e1e"
+        -- Override background to be darker
+        local darker_bg = "#161616"
+        local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+        vim.api.nvim_set_hl(0, "Normal", { fg = normal_hl.fg, bg = darker_bg })
+        vim.api.nvim_set_hl(0, "NormalFloat", { fg = normal_hl.fg, bg = darker_bg })
+        vim.api.nvim_set_hl(0, "NormalNC", { fg = normal_hl.fg, bg = darker_bg })
 
-        vim.api.nvim_set_hl(0, "VertSplit", { fg = bg_hex, bg = bg_hex })
-        vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_hex, bg = bg_hex })
+        -- HACK: Disable pane borders by matching background
+        local bg_hex = darker_bg
+
+        -- vim.api.nvim_set_hl(0, "VertSplit", { fg = bg_hex, bg = bg_hex })
+        -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = bg_hex, bg = bg_hex })
+        vim.api.nvim_set_hl(0, "SignColumn", { bg = bg_hex })
+        -- vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = bg_hex, bg = bg_hex })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_hex })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = bg_hex })
+        -- vim.api.nvim_set_hl(0, "FoldColumn", { bg = bg_hex })
 
         -- HACK: Visual theme tweaks for Snacks.nvim to reduce purple color and improve readability
         local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
@@ -65,6 +76,12 @@ return {
             -- Snacks indent guides - subtle but visible
             vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#3a3739" })
             vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#5a5a5a" })
+
+            -- Snacks window separators
+            vim.api.nvim_set_hl(0, "SnacksWinSeparator", { fg = bg_hex, bg = bg_hex })
+            vim.api.nvim_set_hl(0, "SnacksExplorerWinSeparator", { fg = bg_hex, bg = bg_hex })
+            vim.api.nvim_set_hl(0, "SnacksNormal", { bg = bg_hex })
+            vim.api.nvim_set_hl(0, "SnacksExplorerNormal", { bg = bg_hex })
         end
 
         -- Gitsigns blame - subtle

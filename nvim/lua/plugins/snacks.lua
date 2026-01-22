@@ -77,10 +77,14 @@ return {
             style = "minimal",
         },
         picker = {
+            icons = {
+                git = { enabled = false },
+            },
             sources = {
                 explorer = {
                     hidden = true,
                     ignored = true,
+                    git_status = true,
                 },
                 files = {
                     hidden = true,
