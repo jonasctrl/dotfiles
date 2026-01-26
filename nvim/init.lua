@@ -38,18 +38,5 @@ require("lazy").setup({
         { import = "plugins" },
     },
     install = { colorscheme = { "classic_monokai" } },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "tohtml",
-                "tutor",
-                "2html_plugin",
-                "getscript",
-                "getscriptPlugin",
-                "vimball",
-                "vimballPlugin",
-            },
-        },
-    },
     checker = { enabled = false },
 })
