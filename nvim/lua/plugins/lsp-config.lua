@@ -1,5 +1,23 @@
+local prettier = { "prettierd", "prettier", stop_after_first = true }
+
+local function eslint_config(bufnr)
+    return vim.fs.find({
+        "eslint.config.js",
+        "eslint.config.mjs",
+        "eslint.config.cjs",
+        ".eslintrc.js",
+        ".eslintrc.cjs",
+        ".eslintrc.json",
+        ".eslintrc",
+    }, { upward = true, path = vim.api.nvim_buf_get_name(bufnr) })[1] ~= nil
+end
+
+local function js_formatter(bufnr)
+    if eslint_config(bufnr) then return { lsp_format = "first" } end
+    return prettier
+end
+
 return {
-    -- Mason is package manager for LSP servers
     {
         "williamboman/mason.nvim",
         cmd = { "Mason", "MasonInstall", "MasonUpdate" },
@@ -7,26 +25,25 @@ return {
         opts = {},
     },
 
-    -- Mason-LSPConfig is bridge between mason and lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "williamboman/mason.nvim" },
         opts = {
             ensure_installed = {
-                "lua_ls",
-                "gopls",
-                "ts_ls",
-                "pyright",
-                "marksman",
-                "html",
-                "cssls",
                 "bashls",
+                "cssls",
+                "eslint",
+                "gopls",
+                "html",
+                "lua_ls",
+                "marksman",
+                "pyright",
+                "ts_ls",
             },
         },
     },
 
-    -- LSP Configuration (Neovim 0.11+ native API)
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -35,9 +52,10 @@ return {
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            vim.lsp.config("*", {
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            })
 
-            -- LspAttach keymaps
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local opts = { buffer = args.buf }
@@ -47,17 +65,10 @@ return {
                 end,
             })
 
-            -- Set global LSP defaults (Neovim 0.11+)
-            vim.lsp.config("*", {
-                capabilities = capabilities,
-            })
-
-            -- mason-lspconfig's automatic_enable (default: true)
-            -- will call vim.lsp.enable() for all installed servers
+            vim.lsp.enable("sqlls", false)
         end,
     },
 
-    -- Autocompletion
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -70,9 +81,7 @@ return {
             local cmp = require("cmp")
             return {
                 snippet = {
-                    expand = function(args)
-                        vim.snippet.expand(args.body) -- Native Neovim 0.10+ snippets
-                    end,
+                    expand = function(args) vim.snippet.expand(args.body) end,
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -94,7 +103,6 @@ return {
         end,
     },
 
-    -- Formatting
     {
         "stevearc/conform.nvim",
         event = { "BufWritePre" },
@@ -102,9 +110,7 @@ return {
         keys = {
             {
                 "<leader>f",
-                function()
-                    require("conform").format({ async = true })
-                end,
+                function() require("conform").format({ async = true }) end,
                 mode = "",
                 desc = "Format buffer",
             },
@@ -113,32 +119,32 @@ return {
             formatters_by_ft = {
                 go = { "goimports", "gofmt" },
                 lua = { "stylua" },
-                typescript = { "prettierd", "prettier", stop_after_first = true },
-                javascript = { "prettierd", "prettier", stop_after_first = true },
-                typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-                javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-                html = { "prettierd", "prettier", stop_after_first = true },
-                css = { "prettierd", "prettier", stop_after_first = true },
-                json = { "prettierd", "prettier", stop_after_first = true },
-                -- yaml = { "prettierd", "prettier", stop_after_first = true },
-                markdown = { "prettierd", "prettier", stop_after_first = true },
+                typescript = js_formatter,
+                javascript = js_formatter,
+                typescriptreact = js_formatter,
+                javascriptreact = js_formatter,
+                vue = js_formatter,
+                html = prettier,
+                css = prettier,
+                json = prettier,
                 sh = { "shfmt" },
                 bash = { "shfmt" },
+                yaml = prettier,
+                markdown = prettier,
             },
-            default_format_opts = {
-                lsp_format = "fallback",
-            },
+            default_format_opts = { lsp_format = "fallback" },
             format_on_save = function(bufnr)
-                local disable_filetypes = { "markdown" }
-                if vim.tbl_contains(disable_filetypes, vim.bo[bufnr].filetype) then
-                    return
-                end
-                return { timeout_ms = 500 }
+                -- NOTE: Disable auto-formatting for certain filetypes
+                local no_auto_format = {
+                    yaml = true,
+                    markdown = true,
+                }
+
+                if no_auto_format[vim.bo[bufnr].filetype] then return nil end
+                return { timeout_ms = 1000 }
             end,
             notify_on_error = true,
         },
-        init = function()
-            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-        end,
+        init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
     },
 }

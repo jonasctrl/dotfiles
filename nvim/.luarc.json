@@ -1,7 +1,22 @@
 {
-  "runtime.version": "LuaJIT",
-  "runtime.path": ["lua/?.lua", "lua/?/init.lua"],
-  "diagnostics.globals": ["vim", "Snacks"],
-  "workspace.checkThirdParty": false,
-  "workspace.library": ["$VIMRUNTIME"]
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime": {
+    "version": "LuaJIT"
+  },
+  "workspace": {
+    "library": [
+      "${3rd}/luv/library"
+    ],
+    "checkThirdParty": false
+  },
+  "diagnostics": {
+    "globals": ["vim", "Snacks"],
+    "disable": ["missing-fields"]
+  },
+  "hint": {
+    "enable": true
+  },
+  "format": {
+    "enable": false
+  }
 }

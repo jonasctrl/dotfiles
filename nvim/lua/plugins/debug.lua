@@ -5,21 +5,23 @@ return {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
     },
+    keys = {
+        { "<F5>", function() require("dap").continue() end, desc = "Debug: continue" },
+        { "<F9>", function() require("dap").toggle_breakpoint() end, desc = "Debug: toggle breakpoint" },
+        { "<F10>", function() require("dap").step_over() end, desc = "Debug: step over" },
+        { "<leader>du", function() require("dapui").toggle() end, desc = "Debug: toggle UI" },
+    },
     config = function()
-        require("dap-go").setup()
+        local dap = require("dap")
+        local dapui = require("dapui")
 
-        require("dapui").setup({
+        require("dap-go").setup()
+        dapui.setup({
             layouts = {
                 {
                     elements = {
-                        {
-                            id = "scopes",
-                            size = 0.6,
-                        },
-                        {
-                            id = "breakpoints",
-                            size = 0.4,
-                        },
+                        { id = "scopes", size = 0.6 },
+                        { id = "breakpoints", size = 0.4 },
                     },
                     size = 40,
                     position = "left",
@@ -27,22 +29,14 @@ return {
             },
         })
 
-        require("dap").configurations.go = vim.list_extend(require("dap").configurations.go, {
+        dap.configurations.go = vim.list_extend(dap.configurations.go, {
             {
                 type = "delve",
                 name = "Attach",
                 mode = "local",
                 request = "attach",
-                processId = function()
-                    return require("dap.utils").pick_process({ filter = "go" })
-                end,
-            }
+                processId = function() return require("dap.utils").pick_process({ filter = "go" }) end,
+            },
         })
     end,
-    keys = {
-        { "<F5>",       function() require("dap").continue() end },
-        { "<F9>",       function() require("dap").toggle_breakpoint() end },
-        { "<F10>",      function() require("dap").step_over() end },
-        { "<leader>du", function() require("dapui").toggle() end,         desc = "Toggle DAP UI" },
-    }
 }

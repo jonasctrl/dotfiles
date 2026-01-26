@@ -33,7 +33,7 @@ vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 
 -- Other
-vim.opt.spell = true
+vim.opt.spell = false
 
 -- LSP-based folding (Neovim 0.11+)
 vim.o.foldmethod = "expr"

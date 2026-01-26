@@ -5,71 +5,62 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "query",
-                    "javascript",
-                    "typescript",
-                    "tsx",
-                    "vue",
-                    "html",
-                    "css",
-                    "json",
-                    "python",
-                    "go",
-                    "gomod",
-                    "gowork",
-                    "gosum",
-                    "markdown",
-                    "markdown_inline",
-                    "bash",
-                    "yaml",
-                    "toml",
+        opts = {
+            ensure_installed = {
+                "bash",
+                "css",
+                "go",
+                "gomod",
+                "gosum",
+                "gowork",
+                "html",
+                "javascript",
+                "json",
+                "lua",
+                "markdown",
+                "markdown_inline",
+                "python",
+                "query",
+                "toml",
+                "tsx",
+                "typescript",
+                "vim",
+                "vimdoc",
+                "vue",
+                "yaml",
+            },
+            sync_install = false,
+            auto_install = true,
+            highlight = {
+                enable = true,
+                disable = function(_, buf)
+                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+                    return ok and stats and stats.size > 1024 * 1024
+                end,
+                additional_vim_regex_highlighting = false,
+            },
+            indent = {
+                enable = true,
+                disable = { "python" },
+            },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<C-space>",
+                    node_incremental = "<C-space>",
+                    scope_incremental = false,
+                    node_decremental = "<bs>",
                 },
-                sync_install = false,
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                    disable = function(_, buf)
-                        local max_filesize = 1024 * 1024
-                        ---@diagnostic disable-next-line: undefined-field
-                        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-                        if ok and stats and stats.size > max_filesize then
-                            return true
-                        end
-                    end,
-                    additional_vim_regex_highlighting = false,
-                },
-                indent = {
-                    enable = true,
-                    disable = { "python" },
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = false,
-                        node_decremental = "<bs>",
-                    },
-                },
-            })
-        end,
+            },
+        },
+        config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
     },
 
     -- Auto close/rename HTML tags
     {
         "windwp/nvim-ts-autotag",
         event = { "BufReadPre", "BufNewFile" },
-        opts = {
-            opts = {
-                enable_close_on_slash = false,
-            },
-        },
+        opts = { opts = { enable_close_on_slash = false } },
     },
 
     -- Show code context at the top of the window

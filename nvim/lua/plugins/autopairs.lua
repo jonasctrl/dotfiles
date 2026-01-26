@@ -3,8 +3,6 @@ return {
     event = "InsertEnter",
     opts = {
         check_ts = true,
-        fast_wrap = {
-            map = "<M-e>",
-        },
+        fast_wrap = { map = "<M-e>" },
     },
 }

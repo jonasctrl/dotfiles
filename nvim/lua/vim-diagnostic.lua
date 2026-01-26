@@ -6,9 +6,8 @@ vim.diagnostic.config({
         severity = { min = vim.diagnostic.severity.WARN },
     },
     signs = false,
-    underline = {
-        severity = { min = vim.diagnostic.severity.WARN },
-    },
+    -- NOTE: Disable red squiggly underline
+    underline = false,
     update_in_insert = false,
     severity_sort = true,
 })

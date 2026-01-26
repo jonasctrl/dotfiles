@@ -1,7 +1,7 @@
 return {
     "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
     event = "InsertEnter",
+    cmd = "Copilot",
     opts = {
         suggestion = {
             enabled = true,
@@ -15,13 +15,13 @@ return {
         },
         panel = { enabled = false },
         filetypes = {
-            yaml = true,
-            markdown = true,
-            help = false,
+            ["*"] = true,
+            [".env"] = false,
             gitcommit = false,
             gitrebase = false,
-            [".env"] = false,
-            ["*"] = true,
+            help = false,
+            markdown = true,
+            yaml = true,
         },
     },
 }
