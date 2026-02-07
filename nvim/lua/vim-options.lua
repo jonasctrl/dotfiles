@@ -10,14 +10,16 @@ vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
 -- Display
-vim.opt.termguicolors = true
+vim.opt.winborder = "rounded"
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
+vim.opt.showmode = false
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
 
 -- Search
+vim.opt.inccommand = "split"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
@@ -35,7 +37,7 @@ vim.opt.undofile = true
 -- Other
 vim.opt.spell = false
 
--- LSP-based folding (Neovim 0.11+)
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
-vim.o.foldlevelstart = 99
+-- Treesitter folding (Neovim 0.11+)
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevelstart = 99

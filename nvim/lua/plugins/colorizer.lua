@@ -1,6 +1,6 @@
 -- NOTE: Plugin that allows color codes to be highlighted in the editor
 return {
-    "NvChad/nvim-colorizer.lua", -- Maintained fork of norcalli/nvim-colorizer.lua
+    "catgoose/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
         filetypes = { "*" },

@@ -19,16 +19,16 @@ end
 
 return {
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         cmd = { "Mason", "MasonInstall", "MasonUpdate" },
         build = ":MasonUpdate",
         opts = {},
     },
 
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         event = { "BufReadPre", "BufNewFile" },
-        dependencies = { "williamboman/mason.nvim" },
+        dependencies = { "mason-org/mason.nvim" },
         opts = {
             ensure_installed = {
                 "bashls",
@@ -39,7 +39,7 @@ return {
                 "lua_ls",
                 "marksman",
                 "pyright",
-                "ts_ls",
+                "vtsls",
             },
         },
     },
@@ -48,18 +48,17 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/cmp-nvim-lsp",
+            "mason-org/mason-lspconfig.nvim",
+            "saghen/blink.cmp",
         },
         config = function()
             vim.lsp.config("*", {
-                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                capabilities = require("blink.cmp").get_lsp_capabilities(),
             })
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local opts = { buffer = args.buf }
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                 end,
@@ -70,37 +69,34 @@ return {
     },
 
     {
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-        },
-        opts = function()
-            local cmp = require("cmp")
-            return {
-                snippet = {
-                    expand = function(args) vim.snippet.expand(args.body) end,
+        "saghen/blink.cmp",
+        version = "1.*",
+        opts = {
+            keymap = {
+                preset = "none",
+                ["<C-n>"] = { "show", "select_next", "fallback" },
+                ["<C-p>"] = { "show", "select_prev", "fallback" },
+                ["<C-j>"] = { "select_next", "fallback" },
+                ["<C-k>"] = { "select_prev", "fallback" },
+                ["<Tab>"] = { "accept", "fallback" },
+                ["<CR>"] = { "accept", "fallback" },
+                ["<C-Space>"] = { "show", "fallback" },
+                ["<C-e>"] = { "cancel", "fallback" },
+                ["<C-d>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+            },
+            completion = {
+                documentation = { auto_show = true, auto_show_delay_ms = 750 },
+            },
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+                providers = {
+                    buffer = { min_keyword_length = 3 },
                 },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-j>"] = cmp.mapping.select_next_item(),
-                    ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                }),
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                }, {
-                    { name = "buffer", keyword_length = 3 },
-                    { name = "path" },
-                }),
-            }
-        end,
+            },
+            fuzzy = { implementation = "prefer_rust" },
+        },
+        opts_extend = { "sources.default" },
     },
 
     {

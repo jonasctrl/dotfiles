@@ -1,7 +1,6 @@
 return {
+    -- Highlight, indentation, autotagging
     {
-        -- NOTE: Setup treesitter for various languages
-        -- Highlight, indentation, autotagging
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPre", "BufNewFile" },

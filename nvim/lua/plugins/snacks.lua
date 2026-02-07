@@ -1,39 +1,3 @@
--- HACK: Setup natural sorting for Snacks Explorer
-local function setup_explorer_natural_sort()
-    local ok, Tree = pcall(require, "snacks.explorer.tree")
-    if not ok then return end
-
-    local function natural_compare(a, b)
-        local function pad_numbers(s)
-            return s:gsub("(%d+)", function(n) return ("%010d"):format(tonumber(n)) end)
-        end
-        return pad_numbers(a) < pad_numbers(b)
-    end
-
-    Tree.walk = function(self, node, fn, opts)
-        local abort = fn(node)
-        if abort ~= nil then return abort end
-
-        local children = vim.tbl_values(node.children)
-        table.sort(children, function(a, b)
-            if a.dir ~= b.dir then return a.dir end
-            return natural_compare(a.name, b.name)
-        end)
-
-        for c, child in ipairs(children) do
-            child.last = c == #children
-            abort = false
-            if child.dir and (child.open or (opts and opts.all)) then
-                abort = self:walk(child, fn, opts)
-            else
-                abort = fn(child)
-            end
-            if abort then return true end
-        end
-        return false
-    end
-end
-
 -- HACK: Setup Snacks to use native vim.ui.input
 local function setup_native_input()
     local snacks_input = require("snacks.input")
@@ -52,10 +16,7 @@ return {
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
             once = true,
-            callback = function()
-                setup_explorer_natural_sort()
-                setup_native_input()
-            end,
+            callback = function() setup_native_input() end,
         })
     end,
     ---@diagnostic disable-next-line: undefined-doc-name
