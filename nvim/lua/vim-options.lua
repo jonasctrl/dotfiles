@@ -36,8 +36,3 @@ vim.opt.undofile = true
 
 -- Other
 vim.opt.spell = false
-
--- Treesitter folding (Neovim 0.11+)
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldlevelstart = 99
