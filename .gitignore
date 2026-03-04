@@ -7,9 +7,11 @@
 !aerospace/
 !ghostty/
 !homebrew/
+!raycast/
 !tmux/
 
 !homebrew/Brewfile
+!raycast/*
 !tmux/tmux.conf
 !nvim/**/*
 !aerospace/**/*
