@@ -51,9 +51,15 @@ alias glog='git log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit'
 
 # Zoxide 
 eval "$(zoxide init zsh)"
+alias cd="z"
 
 # FZF
-source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+FZF_PREFIX="$(brew --prefix fzf)"
+source "$FZF_PREFIX/shell/key-bindings.zsh"
+
+# FZF Tab
+FZF_TAB_PREFIX="$(brew --prefix fzf-tab)"
+source "$FZF_TAB_PREFIX/share/fzf-tab/fzf-tab.zsh"
 
 # Rebind autosuggestions (required with MANUAL_REBIND)
 _zsh_autosuggest_bind_widgets

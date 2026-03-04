@@ -6,8 +6,10 @@
 !zsh/
 !aerospace/
 !ghostty/
+!homebrew/
 !tmux/
 
+!homebrew/Brewfile
 !tmux/tmux.conf
 !nvim/**/*
 !aerospace/**/*
