@@ -56,6 +56,8 @@ alias cd="z"
 # FZF
 FZF_PREFIX="$(brew --prefix fzf)"
 source "$FZF_PREFIX/shell/key-bindings.zsh"
+bindkey -r '\ec'
+bindkey -r '^T'
 
 # FZF Tab
 FZF_TAB_PREFIX="$(brew --prefix fzf-tab)"
