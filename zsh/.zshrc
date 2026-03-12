@@ -49,19 +49,22 @@ alias grep='grep --color=auto'
 
 alias glog='git log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit'
 
+# Avoid loading scripts for non-interactive shells and agents.
+if [[ $- != *i* || "$CLAUDE_CODE" == "1" ]]; then
+    return
+fi
+
 # Zoxide 
 eval "$(zoxide init zsh)"
 alias cd="z"
 
 # FZF
-FZF_PREFIX="$(brew --prefix fzf)"
-source "$FZF_PREFIX/shell/key-bindings.zsh"
+source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 bindkey -r '\ec'
 bindkey -r '^T'
 
 # FZF Tab
-FZF_TAB_PREFIX="$(brew --prefix fzf-tab)"
-source "$FZF_TAB_PREFIX/share/fzf-tab/fzf-tab.zsh"
+source "$HOMEBREW_PREFIX/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
 
 # Rebind autosuggestions (required with MANUAL_REBIND)
 _zsh_autosuggest_bind_widgets
