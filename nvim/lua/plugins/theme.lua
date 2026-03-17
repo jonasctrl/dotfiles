@@ -9,8 +9,8 @@ local function custom_monokai()
     hl(0, "NormalFloat", { fg = fg, bg = bg })
     hl(0, "NormalNC", { fg = fg, bg = bg })
     hl(0, "SignColumn", { bg = bg })
-    hl(0, "StatusLine", { bg = bg })
-    hl(0, "StatusLineNC", { bg = bg })
+    hl(0, "StatusLine", { bg = "NONE" })
+    hl(0, "StatusLineNC", { bg = "NONE" })
 
     -- Hide window borders
     hl(0, "WinSeparator", { fg = bg, bg = bg })

@@ -4,9 +4,10 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = function()
         local lazy_status = require("lazy.status")
+
         return {
             options = {
-                theme = "ayu_dark",
+                theme = "dark",
                 icons_enabled = true,
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
@@ -24,10 +25,9 @@ return {
                 lualine_x = {
                     { lazy_status.updates, cond = lazy_status.has_updates },
                     { "encoding" },
-                    { "filetype", icon_only = false, icons_enabled = false },
                 },
-                lualine_y = { "progress" },
-                lualine_z = { "location" },
+                lualine_y = {},
+                lualine_z = {},
             },
         }
     end,
