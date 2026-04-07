@@ -19,5 +19,6 @@
 !zsh/.zshenv
 !zsh/.zshrc
 
+!**/*.sh
 lazy-lock.json
 .DS_Store
