@@ -20,6 +20,7 @@ return {
                 "markdown_inline",
                 "python",
                 "query",
+                "scss",
                 "toml",
                 "tsx",
                 "typescript",

@@ -5,6 +5,8 @@ local function eslint_config(bufnr)
         "eslint.config.js",
         "eslint.config.mjs",
         "eslint.config.cjs",
+        "eslint.config.ts",
+        "eslint.config.mts",
         ".eslintrc.js",
         ".eslintrc.cjs",
         ".eslintrc.json",
@@ -40,6 +42,7 @@ return {
                 "marksman",
                 "pyright",
                 "vtsls",
+                "vue_ls",
             },
         },
     },
@@ -64,7 +67,24 @@ return {
                 end,
             })
 
-            vim.lsp.enable("sqlls", false)
+            -- Vue support: vtsls + @vue/typescript-plugin for .vue import resolution in TS files
+            vim.lsp.config("vtsls", {
+                filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "vue" },
+                settings = {
+                    vtsls = {
+                        tsserver = {
+                            globalPlugins = {
+                                {
+                                    name = "@vue/typescript-plugin",
+                                    location = vim.fn.expand("$MASON")
+                                        .. "/packages/vue-language-server/node_modules/@vue/typescript-plugin",
+                                    languages = { "vue" },
+                                },
+                            },
+                        },
+                    },
+                },
+            })
         end,
     },
 
@@ -123,6 +143,7 @@ return {
                 vue = js_formatter,
                 html = prettier,
                 css = prettier,
+                scss = prettier,
                 json = prettier,
                 sh = { "shfmt" },
                 bash = { "shfmt" },
