@@ -20,7 +20,7 @@ fi
 # 2. Brew bundle (taps, formulae, casks, vscode extensions)
 if [[ -f "$DOTFILES/homebrew/Brewfile" ]]; then
     info "Installing Homebrew packages from Brewfile..."
-    brew bundle --file="$DOTFILES/homebrew/Brewfile" --no-lock || warn "Some packages failed to install — check output above"
+    brew bundle --file="$DOTFILES/homebrew/Brewfile" || warn "Some packages failed to install — check output above"
     ok "Homebrew packages done"
 else
     warn "No Brewfile found at $DOTFILES/homebrew/Brewfile — skipping"
