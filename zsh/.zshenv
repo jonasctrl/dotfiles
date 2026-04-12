@@ -1,6 +1,9 @@
 # Prevent PATH duplicates in nested shells
 typeset -U PATH path
 
+# Homebrew
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export NVM_DIR="$HOME/.nvm"
 

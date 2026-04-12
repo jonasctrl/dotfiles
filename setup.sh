@@ -47,24 +47,7 @@ info "Setting up ZSH symlinks..."
 link "$DOTFILES/zsh/.zshrc"  "$HOME/.zshrc"
 link "$DOTFILES/zsh/.zshenv" "$HOME/.zshenv"
 
-# 4. ZSH plugins (git clones)
-ZSH_PLUGIN_DIR="$DOTFILES/zsh/plugins"
-mkdir -p "$ZSH_PLUGIN_DIR"
-
-clone_plugin() {
-    local repo="$1" dir="$ZSH_PLUGIN_DIR/$(basename "$repo")"
-    if [[ -d "$dir" ]]; then
-        ok "ZSH plugin already installed: $(basename "$repo")"
-    else
-        info "Cloning ZSH plugin: $repo..."
-        git clone "https://github.com/$repo.git" "$dir"
-        ok "Installed ZSH plugin: $(basename "$repo")"
-    fi
-}
-
-clone_plugin "zsh-users/zsh-autosuggestions"
-
-# 5. TPM + tmux plugins
+# 4. TPM + tmux plugins
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 
 if [[ -d "$TPM_DIR" ]]; then
