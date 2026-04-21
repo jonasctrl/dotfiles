@@ -1,24 +1,7 @@
--- HACK: Setup Snacks to use native vim.ui.input
-local function setup_native_input()
-    local snacks_input = require("snacks.input")
-    snacks_input.input = function(input_opts, on_confirm)
-        local prompt = input_opts.prompt or ""
-        local default = input_opts.default or ""
-        vim.ui.input({ prompt = prompt, default = default }, on_confirm)
-    end
-end
-
 return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    init = function()
-        vim.api.nvim_create_autocmd("User", {
-            pattern = "VeryLazy",
-            once = true,
-            callback = function() setup_native_input() end,
-        })
-    end,
     ---@diagnostic disable-next-line: undefined-doc-name
     ---@type snacks.Config
     opts = {
@@ -31,10 +14,7 @@ return {
             },
         },
         explorer = { enabled = true },
-        indent = {
-            enabled = true,
-            animate = { enabled = false },
-        },
+        indent = { enabled = false },
         input = { enabled = false },
         notifier = {
             enabled = true,
@@ -56,7 +36,7 @@ return {
             },
         },
         quickfile = { enabled = true },
-        scope = { enabled = true },
+        scope = { enabled = false },
         scroll = { enabled = false },
         statuscolumn = { enabled = false },
         words = { enabled = false },

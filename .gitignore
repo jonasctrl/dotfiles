@@ -9,8 +9,10 @@
 !homebrew/
 !raycast/
 !tmux/
+!claude/
 
 !homebrew/Brewfile
+!claude/settings.json
 !raycast/*
 !tmux/tmux.conf
 !nvim/**/*

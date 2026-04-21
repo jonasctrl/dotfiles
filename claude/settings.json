@@ -1,0 +1,6 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "jq -r '\"[\\(.model.display_name)] ctx: \\(.context_window.remaining_percentage // 100 | floor)% left | 5h: \\(100 - (.rate_limits.five_hour.used_percentage // 0) | floor)% left | 7d: \\(100 - (.rate_limits.seven_day.used_percentage // 0) | floor)% left | $\\(.cost.total_cost_usd // 0 | tostring | .[0:5])\"'"
+  }
+}

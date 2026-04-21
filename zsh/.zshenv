@@ -12,3 +12,4 @@ export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin:/Applications/Visual Studio Cod
 
 ENV_PRIVATE_PATH="$HOME/.config/zsh/.zshenv_private"
 [[ -f "$ENV_PRIVATE_PATH" ]] && source "$ENV_PRIVATE_PATH"
+. "$HOME/.cargo/env"

@@ -2,10 +2,13 @@ return {
     -- Highlight, indentation, autotagging
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
         build = ":TSUpdate",
-        event = { "BufReadPre", "BufNewFile" },
-        opts = {
-            ensure_installed = {
+        config = function()
+            require("nvim-treesitter").setup({})
+
+            require("nvim-treesitter").install({
                 "bash",
                 "css",
                 "go",
@@ -20,6 +23,7 @@ return {
                 "markdown_inline",
                 "python",
                 "query",
+                "rust",
                 "scss",
                 "toml",
                 "tsx",
@@ -28,32 +32,25 @@ return {
                 "vimdoc",
                 "vue",
                 "yaml",
-            },
-            sync_install = false,
-            auto_install = true,
-            highlight = {
-                enable = true,
-                disable = function(_, buf)
-                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    return ok and stats and stats.size > 1024 * 1024
+            })
+
+            -- Enable treesitter highlighting per buffer (skip large files)
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(args)
+                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+                    if ok and stats and stats.size > 1024 * 1024 then return end
+                    pcall(vim.treesitter.start, args.buf)
                 end,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = {
-                enable = true,
-                disable = { "python" },
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<C-space>",
-                    node_incremental = "<C-space>",
-                    scope_incremental = false,
-                    node_decremental = "<bs>",
-                },
-            },
-        },
-        main = "nvim-treesitter",
+            })
+
+            -- Enable treesitter indentation (skip python)
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(args)
+                    if vim.bo[args.buf].filetype == "python" then return end
+                    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+        end,
     },
 
     -- Auto close/rename HTML tags
@@ -66,6 +63,7 @@ return {
     -- Show code context at the top of the window
     {
         "nvim-treesitter/nvim-treesitter-context",
+        enabled = true,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             max_lines = 3,
