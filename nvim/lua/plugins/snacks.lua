@@ -13,7 +13,7 @@ return {
                 { section = "startup" },
             },
         },
-        explorer = { enabled = true },
+        explorer = { enabled = false },
         indent = { enabled = false },
         input = { enabled = false },
         notifier = {
@@ -48,7 +48,7 @@ return {
         { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
         -- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+        -- { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 
         -- Find
         { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },

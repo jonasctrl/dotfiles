@@ -53,6 +53,28 @@ local function custom_monokai()
 
     -- Gitsigns
     hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
+
+    -- Neo-tree
+    hl(0, "NeoTreeNormal", { fg = fg_hex, bg = bg })
+    hl(0, "NeoTreeNormalNC", { fg = fg_hex, bg = bg })
+    hl(0, "NeoTreeEndOfBuffer", { fg = bg, bg = bg })
+    hl(0, "NeoTreeWinSeparator", { fg = bg, bg = bg })
+    hl(0, "NeoTreeDirectoryName", { fg = "#e6a852", bold = true })
+    hl(0, "NeoTreeDirectoryIcon", { fg = "#e6a852" })
+    hl(0, "NeoTreeRootName", { fg = "#f2c55c", bold = true })
+    hl(0, "NeoTreeFileName", { fg = fg_hex })
+    hl(0, "NeoTreeCursorLine", { bg = "#2d2a2e" })
+    hl(0, "NeoTreeTitleBar", { fg = fg_hex, bg = bg })
+    hl(0, "NeoTreeFloatTitle", { fg = "#e6a852", bg = bg, bold = true })
+    hl(0, "NeoTreeFloatBorder", { fg = "#3a3739", bg = bg })
+    hl(0, "NeoTreeFloatNormal", { fg = fg_hex, bg = bg })
+    hl(0, "NeoTreeIndentMarker", { fg = "#3a3739" })
+    hl(0, "NeoTreeExpander", { fg = "#5a5a5a" })
+    hl(0, "NeoTreeGitAdded", { fg = "#b6e27a" })
+    hl(0, "NeoTreeGitModified", { fg = "#e6a852" })
+    hl(0, "NeoTreeGitUntracked", { fg = "#9ecbff" })
+    hl(0, "NeoTreeGitDeleted", { fg = "#ff8f8f" })
+    hl(0, "NeoTreeGitConflict", { fg = "#ff8f8f", bold = true })
 end
 
 return {

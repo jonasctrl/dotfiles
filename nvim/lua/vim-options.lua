@@ -10,6 +10,7 @@ vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
 -- Display
+vim.opt.showtabline = 0
 vim.opt.winborder = "rounded"
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
