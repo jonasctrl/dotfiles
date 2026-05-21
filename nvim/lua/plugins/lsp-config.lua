@@ -167,4 +167,21 @@ return {
         },
         init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
     },
+
+    {
+        "mfussenegger/nvim-lint",
+        ft = { "go" },
+        config = function()
+            require("lint").linters_by_ft = {
+                go = { "golangcilint" },
+            }
+
+            local group = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
+            vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
+                group = group,
+                pattern = "*.go",
+                callback = function() require("lint").try_lint() end,
+            })
+        end,
+    },
 }

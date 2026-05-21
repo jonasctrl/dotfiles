@@ -17,7 +17,7 @@ return {
         indent = { enabled = false },
         input = { enabled = false },
         notifier = {
-            enabled = true,
+            enabled = false,
             style = "minimal",
         },
         picker = {

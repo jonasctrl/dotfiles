@@ -1,7 +1,7 @@
 local function custom_monokai()
     local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
     local fg_hex = fg and string.format("#%06x", fg) or "#f8f8f2"
-    local bg = "#161616"
+    local bg = "NONE"
     local hl = vim.api.nvim_set_hl
 
     -- Background overrides
@@ -13,9 +13,10 @@ local function custom_monokai()
     hl(0, "StatusLineNC", { bg = "NONE" })
 
     -- Hide window borders
-    hl(0, "WinSeparator", { fg = bg, bg = bg })
-    hl(0, "SnacksWinSeparator", { fg = bg, bg = bg })
-    hl(0, "SnacksExplorerWinSeparator", { fg = bg, bg = bg })
+    hl(0, "WinSeparator", { fg = "#3a3739", bg = bg })
+    hl(0, "MsgSeparator", { fg = "#3a3739", bg = bg })
+    hl(0, "SnacksWinSeparator", { fg = "#3a3739", bg = bg })
+    hl(0, "SnacksExplorerWinSeparator", { fg = "#3a3739", bg = bg })
     hl(0, "SnacksNormal", { bg = bg })
     hl(0, "SnacksExplorerNormal", { bg = bg })
 
@@ -36,6 +37,27 @@ local function custom_monokai()
     -- Explorer cursor
     hl(0, "SnacksExplorerCursorLine", { bg = "#2d2a2e" })
     hl(0, "SnacksExplorerCursor", { bg = "#3a3739" })
+
+    -- Snacks picker transparency
+    hl(0, "SnacksPicker", { bg = bg })
+    hl(0, "SnacksPickerBorder", { bg = bg })
+    hl(0, "SnacksPickerTitle", { bg = bg })
+    hl(0, "SnacksPickerFooter", { bg = bg })
+    hl(0, "SnacksPickerInput", { bg = bg })
+    hl(0, "SnacksPickerInputBorder", { bg = bg })
+    hl(0, "SnacksPickerInputTitle", { bg = bg })
+    hl(0, "SnacksPickerList", { bg = bg })
+    hl(0, "SnacksPickerListBorder", { bg = bg })
+    hl(0, "SnacksPickerListTitle", { bg = bg })
+    hl(0, "SnacksPickerPreview", { bg = bg })
+    hl(0, "SnacksPickerPreviewBorder", { bg = bg })
+    hl(0, "SnacksPickerPreviewTitle", { bg = bg })
+    hl(0, "SnacksPickerBox", { bg = bg })
+    hl(0, "SnacksPickerBoxBorder", { bg = bg })
+    hl(0, "SnacksPickerBoxTitle", { bg = bg })
+    hl(0, "FloatBorder", { bg = bg })
+    hl(0, "FloatTitle", { bg = bg })
+    hl(0, "FloatFooter", { bg = bg })
 
     -- Replace purple highlights with neutral colors
     hl(0, "Constant", { fg = fg_hex })
@@ -58,7 +80,7 @@ local function custom_monokai()
     hl(0, "NeoTreeNormal", { fg = fg_hex, bg = bg })
     hl(0, "NeoTreeNormalNC", { fg = fg_hex, bg = bg })
     hl(0, "NeoTreeEndOfBuffer", { fg = bg, bg = bg })
-    hl(0, "NeoTreeWinSeparator", { fg = bg, bg = bg })
+    hl(0, "NeoTreeWinSeparator", { fg = "#3a3739", bg = bg })
     hl(0, "NeoTreeDirectoryName", { fg = "#e6a852", bold = true })
     hl(0, "NeoTreeDirectoryIcon", { fg = "#e6a852" })
     hl(0, "NeoTreeRootName", { fg = "#f2c55c", bold = true })
