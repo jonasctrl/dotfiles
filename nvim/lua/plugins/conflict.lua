@@ -1,7 +1,7 @@
 return {
     "akinsho/git-conflict.nvim",
     version = "*",
-    event = "BufReadPost",
+    event = "BufReadPre",
     opts = {},
     keys = {
         { "<leader>co", "<Plug>(git-conflict-ours)", desc = "Conflict: choose ours" },
