@@ -60,37 +60,37 @@ automatically-unhide-macos-hidden-apps = true
 
 # App IDs are used to match applications.
 # osascript -e 'id of app "DBeaver"'
+#
+# Float-by-default model: the first rule floats every new window, then
+# per-app rules below override with 'layout tiling' for apps we want
+# managed. Order matters: the catch-all must come first and set
+# check-further-callbacks = true so subsequent rules still run.
 
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace 1']
+check-further-callbacks = true
+run = ['layout floating']
 
-[[on-window-detected]]
-if.app-id = 'com.apple.mail'
-run = ['move-node-to-workspace 1']
-
-[[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
-run = ['move-node-to-workspace 2']
+# --- Tiled apps (override the float default) ---
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
-run = ['move-node-to-workspace 3']
+run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-id = 'org.jkiss.dbeaver.core.product'
-if.during-aerospace-startup = true
-if.window-title-regex-substring = '^DBeaver.*Universal Database'
-check-further-callbacks = true
-run = ['move-node-to-workspace 5']
+if.app-id = 'com.mitchellh.ghostty'
+run = ['layout tiling']
 
 [[on-window-detected]]
-if.app-id = 'com.postmanlabs.mac'
-run = ['move-node-to-workspace 5']
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['layout tiling', 'move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = ['layout tiling', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace 6']
+run = ['layout tiling', 'move-node-to-workspace 6']
 
 # List monitors
 # aerospace list-monitors
