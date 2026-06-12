@@ -32,14 +32,15 @@ setopt prompt_subst
 PROMPT='%F{cyan}%~%f ${vcs_info_msg_0_} '
 
 # Lazy-load NVM
-_load_nvm() {
-  unset -f nvm node npm npx _load_nvm
+load_nvm() {
+  unset -f nvm node npm npx load_nvm 2>/dev/null
   [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
 }
-nvm() { _load_nvm; nvm "$@"; }
-node() { _load_nvm; node "$@"; }
-npm() { _load_nvm; npm "$@"; }
-npx() { _load_nvm; npx "$@"; }
+
+nvm()  { load_nvm; nvm "$@"; }
+node() { load_nvm; command node "$@"; }
+npm()  { load_nvm; command npm "$@"; }
+npx()  { load_nvm; command npx "$@"; }
 
 # Aliases
 alias reload="exec zsh"
