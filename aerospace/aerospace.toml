@@ -85,12 +85,7 @@ run = ['layout tiling']
 # so they hit the second rule and stay floating.
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-if.window-title-regex-substring = '\[Main\]'
 run = ['layout tiling', 'move-node-to-workspace 1']
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
