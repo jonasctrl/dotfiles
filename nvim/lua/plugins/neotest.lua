@@ -4,9 +4,9 @@ return {
         "nvim-neotest/nvim-nio",
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
-        "nvim-neotest/neotest-go",
+        "antoinemadec/FixCursorHold.nvim",
+        "fredrikaverpil/neotest-golang",
     },
-    enabled = false,
     keys = {
         { "<leader>tt", function() require("neotest").run.run() end, desc = "Run nearest test" },
         { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run file tests" },
@@ -20,12 +20,14 @@ return {
     opts = function()
         return {
             adapters = {
-                require("neotest-go")({
-                    experimental = { test_table = true },
-                    args = { "-count=1", "-race" },
+                require("neotest-golang")({
+                    -- runner = "gotestsum", -- recommended (more reliable JSON parsing);
+                    -- requires: go install gotest.tools/gotestsum@latest
+                    go_test_args = { "-v", "-count=1", "-race" },
+                    warn_test_name_dupes = false,
                 }),
             },
-            status = { virtual_text = true },
+            status = { virtual_text = false },
             output = { open_on_run = false },
         }
     end,
