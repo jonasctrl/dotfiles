@@ -1,15 +1,11 @@
-HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+# Loaded by home-manager (nix/home.nix); the _hm_* vars are set there.
 
-HISTSIZE=50000
-SAVEHIST=50000
-setopt HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS SHARE_HISTORY INC_APPEND_HISTORY EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
 
-# Plugins
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$_hm_zsh_autosuggestions"
 
-# Completion 
 autoload -Uz compinit
 _comp_files=(${ZDOTDIR:-$HOME}/.zcompdump(Nm-20))
 if (( $#_comp_files )); then
@@ -18,54 +14,43 @@ else
   compinit -i
 fi
 unset _comp_files
-
 setopt COMPLETE_ALIASES COMPLETE_IN_WORD ALWAYS_TO_END
 
-# Git prompt
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats '%F{cyan}(%F{red}%b%F{cyan})%f'
 zstyle ':vcs_info:git:*' actionformats '%F{cyan}(%F{yellow}%b%F{cyan})%f'
-
 precmd() { vcs_info }
 setopt prompt_subst
 PROMPT='%F{cyan}%~%f ${vcs_info_msg_0_} '
 
-# Lazy-load NVM
+alias reload="exec zsh"
+alias ls='ls --color=auto'
+alias ll='ls -lah --color=auto'
+alias grep='grep --color=auto'
+alias glog='git log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit'
+
 load_nvm() {
   unset -f nvm node npm npx load_nvm 2>/dev/null
   [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
 }
-
 nvm()  { load_nvm; nvm "$@"; }
 node() { load_nvm; command node "$@"; }
 npm()  { load_nvm; command npm "$@"; }
 npx()  { load_nvm; command npx "$@"; }
 
-# Aliases
-alias reload="exec zsh"
-alias ls='ls --color=auto'
-alias ll='ls -lah --color=auto'
-alias grep='grep --color=auto'
-
-alias glog='git log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit'
-
-# Avoid loading scripts for non-interactive shells and agents.
+# Skip zoxide/fzf/etc for non-interactive and agent shells.
 if [[ $- != *i* || "$CLAUDE_CODE" == "1" ]]; then
     return
 fi
 
-# Zoxide 
-eval "$(zoxide init zsh)"
+eval "$("$_hm_zoxide" init zsh)"
 alias cd="z"
 
-# FZF
-source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
+source "$_hm_fzf_keybindings"
 bindkey -r '\ec'
 bindkey -r '^T'
 
-# FZF Tab
-source "$HOMEBREW_PREFIX/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+source "$_hm_fzf_tab"
 
-# Rebind autosuggestions (required with MANUAL_REBIND)
 _zsh_autosuggest_bind_widgets

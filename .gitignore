@@ -1,23 +1,24 @@
 *
 
 !.gitignore
+!README.md
+!AGENTS.md
 
 !nvim/
 !zsh/
 !aerospace/
 !ghostty/
-!homebrew/
 !tmux/
 !claude/
+!nix/
 
-!homebrew/Brewfile
+!nix/**/*
+nix/local.nix
 !claude/settings.json
 !tmux/tmux.conf
 !nvim/**/*
 !aerospace/**/*
 !ghostty/**/*
-!zsh/.zshenv
-!zsh/.zshrc
 
 !**/*.sh
 lazy-lock.json

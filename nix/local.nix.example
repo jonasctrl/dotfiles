@@ -1,0 +1,6 @@
+# Per-machine settings. Copy to local.nix (gitignored) and fill in your values.
+{
+  user = "your-macos-username"; # output of `whoami`
+  gitName = "Your Name";
+  gitEmail = "you@example.com";
+}
