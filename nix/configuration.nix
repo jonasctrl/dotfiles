@@ -46,13 +46,11 @@
     };
 
     taps = [
-      "barutsrb/tap"
-      "datawire/blackbird"
-      "metalbear-co/mirrord"
-      "minio/stable"
-      "nats-io/nats-tools"
-      "nikitabobko/tap"
-      "tw93/tap"
+      "datawire/blackbird"   # telepresence (k8s)
+      "metalbear-co/mirrord" # mirrord      (k8s)
+      "minio/stable"         # mc (MinIO client)
+      "nats-io/nats-tools"   # nats CLI
+      "nikitabobko/tap"      # aerospace
     ];
 
     brews = [
@@ -61,14 +59,17 @@
       "docker"
       "docker-buildx"
       "docker-compose"
-      "fileicon"
       "go-size-analyzer"
       "mariadb"
+      "minio/stable/mc"
+      "merve"
+      "metalbear-co/mirrord/mirrord"
       "mise"
       "mole"
+      "nats-io/nats-tools/nats"
       "nvm"
       "redis"
-      "rustup"
+      "datawire/blackbird/telepresence"
     ];
 
     casks = [
@@ -79,8 +80,6 @@
       "claude-code@latest"
       "copilot-cli"
       "dbeaver-community"
-      "font-caskaydia-cove-nerd-font"
-      "font-fira-code-nerd-font"
       "font-meslo-lg-nerd-font"
       "ghostty"
       "keymapp"
