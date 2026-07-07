@@ -86,7 +86,6 @@
       "keymapp"
       "obs"
       "obsidian"
-      "postman"
       "raycast"
       "rectangle"
       "the-unarchiver"
