@@ -66,7 +66,6 @@
       "mariadb"
       "mise"
       "mole"
-      "neofetch" # not in nixpkgs
       "nvm"
       "redis"
       "rustup"
@@ -85,7 +84,6 @@
       "font-meslo-lg-nerd-font"
       "ghostty"
       "keymapp"
-      "notion"
       "obs"
       "obsidian"
       "postman"
