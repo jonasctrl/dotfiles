@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ user, ... }:
 
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -56,17 +56,13 @@
     ];
 
     brews = [
-      "abseil"
-      "brew-cask-completion"
       "colima"
-      "zstd"
       "context7-mcp"
       "docker"
       "docker-buildx"
       "docker-compose"
       "fileicon"
       "go-size-analyzer"
-      "libomp"
       "mariadb"
       "mise"
       "mole"
@@ -74,9 +70,6 @@
       "nvm"
       "redis"
       "rustup"
-      "fzf-tab"
-      "zsh-autosuggestions"
-      "zsh-syntax-highlighting"
     ];
 
     casks = [

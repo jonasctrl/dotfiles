@@ -2,7 +2,8 @@
 
 !.gitignore
 !README.md
-!AGENTS.md
+!agents/
+!agents/AGENTS.md
 
 !nvim/
 !zsh/

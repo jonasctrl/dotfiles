@@ -11,7 +11,7 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, nix-homebrew }:
+  outputs = { nix-darwin, home-manager, nix-homebrew, ... }:
     let
       local =
         if builtins.pathExists ./local.nix then import ./local.nix
@@ -20,8 +20,7 @@
     in
     {
       darwinConfigurations."darwin" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs user local; };
+        specialArgs = { inherit user local; };
         modules = [
           ./configuration.nix
 
@@ -32,7 +31,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.extraSpecialArgs = { inherit inputs user local; };
+            home-manager.extraSpecialArgs = { inherit user local; };
             home-manager.users.${user} = import ./home.nix;
           }
         ];

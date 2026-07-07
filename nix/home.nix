@@ -39,12 +39,14 @@
     uv
     poetry
     pnpm
+    nh
   ];
 
   home.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     NVM_DIR = "$HOME/.nvm";
     GOPATH = "$HOME/go";
+    NH_DARWIN_FLAKE = "path:$HOME/.config/nix#darwin";
   };
 
   home.sessionPath = [
@@ -109,7 +111,7 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/claude/settings.json";
 
   home.file.".claude/CLAUDE.md".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/AGENTS.md";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/agents/AGENTS.md";
 
   home.activation.tmuxPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     TPM_DIR="$HOME/.tmux/plugins/tpm"
