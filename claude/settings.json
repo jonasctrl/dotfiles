@@ -1,4 +1,5 @@
 {
+  "model": "claude-fable-5[1m]",
   "statusLine": {
     "type": "command",
     "command": "jq -r '\"[\\(.model.display_name)] ctx: \\(.context_window.remaining_percentage // 100 | floor)% left | 5h: \\(100 - (.rate_limits.five_hour.used_percentage // 0) | floor)% left | 7d: \\(100 - (.rate_limits.seven_day.used_percentage // 0) | floor)% left | $\\(.cost.total_cost_usd // 0 | tostring | .[0:5])\"'"
@@ -7,8 +8,21 @@
     "gopls-lsp@claude-plugins-official": true,
     "context7@claude-plugins-official": true
   },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_response.filePath // empty' | { read -r f; case \"$f\" in *.go) if command -v goimports >/dev/null; then goimports -w \"$f\"; else gofmt -w \"$f\"; fi;; esac; } 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "effortLevel": "high",
   "skipWorkflowUsageWarning": true,
-  "theme": "dark-ansi",
-  "model": "opus[1m]"
+  "theme": "dark-ansi"
 }
