@@ -11,6 +11,13 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # NOTE: defaults run Sun 03:15 (gc) and 04:15 (optimise); missed runs fire on wake.
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 14d";
+  };
+  nix.optimise.automatic = true;
+
   programs.zsh.enable = true;
   # NOTE: otherwise /etc/zshrc runs a compinit that prompts about insecure files.
   programs.zsh.enableGlobalCompInit = false;
