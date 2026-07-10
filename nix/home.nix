@@ -44,7 +44,6 @@
 
   home.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
-    NVM_DIR = "$HOME/.nvm";
     GOPATH = "$HOME/go";
     NH_DARWIN_FLAKE = "path:$HOME/.config/nix#darwin";
   };
@@ -95,7 +94,6 @@
 
       ENV_PRIVATE_PATH="$HOME/.config/zsh/.zshenv_private"
       [[ -f "$ENV_PRIVATE_PATH" ]] && source "$ENV_PRIVATE_PATH"
-      [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
     '';
 
     initContent = ''
@@ -106,7 +104,6 @@
     '' + builtins.readFile ./zshrc.zsh;
   };
 
-  # Editable symlink so Claude Code can still write to the file.
   home.file.".claude/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/claude/settings.json";
 

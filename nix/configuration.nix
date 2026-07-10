@@ -74,7 +74,6 @@
       "mise"
       "mole"
       "nats-io/nats-tools/nats"
-      "nvm"
       "redis"
       "datawire/blackbird/telepresence"
     ];
