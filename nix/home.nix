@@ -1,6 +1,8 @@
 { config, lib, pkgs, user, local, ... }:
 
 {
+  imports = [ ./modules/zsh.nix ];
+
   home.username = user;
   home.homeDirectory = "/Users/${user}";
   home.stateVersion = "26.05";
@@ -20,7 +22,6 @@
     stylua
     prettier
     sql-formatter
-    kubectl
     k9s
     btop
     htop
@@ -69,39 +70,6 @@
       ".claude"
       ".codegraph"
     ];
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = false;
-    autosuggestion.enable = false;
-    syntaxHighlighting.enable = false;
-
-    history = {
-      size = 50000;
-      save = 50000;
-      path = "$HOME/.zsh_history";
-      ignoreAllDups = true;
-      ignoreSpace = true;
-      saveNoDups = true;
-      share = true;
-      extended = true;
-    };
-
-    envExtra = ''
-      typeset -U PATH path
-      [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-      ENV_PRIVATE_PATH="$HOME/.config/zsh/.zshenv_private"
-      [[ -f "$ENV_PRIVATE_PATH" ]] && source "$ENV_PRIVATE_PATH"
-    '';
-
-    initContent = ''
-      _hm_zsh_autosuggestions="${pkgs.zsh-autosuggestions}/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-      _hm_zoxide="${pkgs.zoxide}/bin/zoxide"
-      _hm_fzf_keybindings="${pkgs.fzf}/share/fzf/key-bindings.zsh"
-      _hm_fzf_tab="${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
-    '' + builtins.readFile ./zshrc.zsh;
   };
 
   home.file.".claude/settings.json".source =

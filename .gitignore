@@ -12,10 +12,12 @@
 !tmux/
 !claude/
 !nix/
+!mise/
 
 !nix/**/*
 nix/local.nix
 !claude/settings.json
+!mise/config.toml
 !tmux/tmux.conf
 !nvim/**/*
 !aerospace/**/*

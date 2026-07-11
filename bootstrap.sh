@@ -21,3 +21,5 @@ fi
 sudo /nix/var/nix/profiles/default/bin/nix --extra-experimental-features "nix-command flakes" \
   run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild -- \
   switch --flake "$FLAKE"
+
+/opt/homebrew/bin/mise install
