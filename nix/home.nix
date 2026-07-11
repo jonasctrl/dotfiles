@@ -18,7 +18,6 @@
     lazydocker
     neovim
     tree-sitter
-    luarocks
     stylua
     prettier
     k9s

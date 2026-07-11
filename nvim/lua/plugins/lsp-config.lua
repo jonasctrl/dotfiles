@@ -1,4 +1,4 @@
-local prettier = { "prettierd", "prettier", stop_after_first = true }
+local prettier = { "prettier" }
 
 local function eslint_config(bufnr)
     return vim.fs.find({

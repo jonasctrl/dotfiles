@@ -3,6 +3,9 @@ set -euo pipefail
 
 FLAKE="path:$HOME/.config/nix"
 
+# Xcode CLT provides cc, needed for nvim-treesitter parser compilation.
+xcode-select -p >/dev/null 2>&1 || { xcode-select --install; echo "Install CLT."; exit 1; }
+
 if [ ! -e /nix/var/nix/profiles/default/bin/nix ]; then
   curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --enable-flakes
 fi

@@ -39,4 +39,5 @@ require("lazy").setup({
     },
     install = { colorscheme = { "classic-monokai" } },
     checker = { enabled = false },
+    rocks = { enabled = false },
 })
