@@ -38,6 +38,7 @@
     sd
     parallel
     tmux
+    mise
     uv
     poetry
     pnpm

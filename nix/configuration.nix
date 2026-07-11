@@ -58,7 +58,6 @@
       "minio/stable/mc"
       "merve"
       "metalbear-co/mirrord/mirrord"
-      "mise"
       "mole"
       "nats-io/nats-tools/nats"
       "redis"

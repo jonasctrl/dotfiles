@@ -34,4 +34,4 @@ fi
   build "$FLAKE#darwinConfigurations.darwin.system" --out-link /tmp/bootstrap-system
 sudo /tmp/bootstrap-system/sw/bin/darwin-rebuild switch --flake "$FLAKE#darwin"
 
-/opt/homebrew/bin/mise install
+"/etc/profiles/per-user/$(whoami)/bin/mise" install
