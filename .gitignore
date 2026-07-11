@@ -6,7 +6,6 @@
 !agents/AGENTS.md
 
 !nvim/
-!zsh/
 !aerospace/
 !ghostty/
 !tmux/
@@ -24,5 +23,4 @@ nix/local.nix
 !ghostty/**/*
 
 !**/*.sh
-lazy-lock.json
 .DS_Store

@@ -21,7 +21,6 @@
     luarocks
     stylua
     prettier
-    sql-formatter
     k9s
     btop
     htop
@@ -32,6 +31,9 @@
     xh
     go
     golangci-lint
+    gotools
+    delve
+    shfmt
     semgrep
     jq
     sd

@@ -6,3 +6,8 @@ Apply change with:
 ```
 ~/.config/rebuild.sh
 ```
+
+Bootstrap nix-darwin and home-manager with:
+```
+~/.config/bootstrap.sh
+```

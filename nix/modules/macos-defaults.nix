@@ -8,6 +8,10 @@
       autohide = true;
       tilesize = 46;
       show-recents = false;
+
+      # Group windows by application in Mission Control; otherwise aerospace's
+      # corner-stashed windows make all thumbnails unreadably small.
+      expose-group-apps = true;
     };
     finder.FXPreferredViewStyle = "Nlsv";
 

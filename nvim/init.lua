@@ -37,6 +37,6 @@ require("lazy").setup({
     spec = {
         { import = "plugins" },
     },
-    install = { colorscheme = { "classic_monokai" } },
+    install = { colorscheme = { "classic-monokai" } },
     checker = { enabled = false },
 })
