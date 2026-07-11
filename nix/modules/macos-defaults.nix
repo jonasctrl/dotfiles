@@ -4,6 +4,7 @@
       AppleInterfaceStyle = "Dark";
       "com.apple.swipescrolldirection" = false;
     };
+
     dock = {
       autohide = true;
       tilesize = 46;
@@ -13,6 +14,7 @@
       # corner-stashed windows make all thumbnails unreadably small.
       expose-group-apps = true;
     };
+
     finder.FXPreferredViewStyle = "Nlsv";
 
     controlcenter.BatteryShowPercentage = true;
