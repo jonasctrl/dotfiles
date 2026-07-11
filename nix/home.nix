@@ -111,7 +111,7 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/agents/AGENTS.md";
 
   home.activation.tmuxPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    TPM_DIR="$HOME/.tmux/plugins/tpm"
+    TPM_DIR="$HOME/.config/tmux/plugins/tpm"
     if [ ! -d "$TPM_DIR" ]; then
       ${pkgs.git}/bin/git clone --depth 1 https://github.com/tmux-plugins/tpm "$TPM_DIR" \
         && TERM=xterm-256color PATH="${pkgs.tmux}/bin:$PATH" "$TPM_DIR/bin/install_plugins" \
