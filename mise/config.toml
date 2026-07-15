@@ -3,4 +3,4 @@ idiomatic_version_file_enable_tools = ["node"]
 
 [tools]
 node = "lts"
-kubectl = "1.35.4"
+kubectl = "1.36.2"

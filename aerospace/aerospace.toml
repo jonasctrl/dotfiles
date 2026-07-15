@@ -1,11 +1,7 @@
-# NOTE: config-version = 2 and persistent-workspaces require a recent AeroSpace
-# (installed via the nikitabobko tap cask in nix/configuration.nix).
 config-version = 2
 
-# Workspaces that persist even when empty (shows in menubar)
 persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-# Start AeroSpace at login
 start-at-login = true
 
 enable-normalization-flatten-containers = true
@@ -17,7 +13,6 @@ default-root-container-orientation = 'auto'
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# Turn off macOS "Hide application" (cmd-h)
 automatically-unhide-macos-hidden-apps = true
 
 [key-mapping]
@@ -36,8 +31,7 @@ automatically-unhide-macos-hidden-apps = true
 #
 # Float-by-default model: the first rule floats every new window, then
 # per-app rules below override with 'layout tiling' for apps we want
-# managed. Order matters: the catch-all must come first and set
-# check-further-callbacks = true so subsequent rules still run.
+# managed.
 
 [[on-window-detected]]
 check-further-callbacks = true
@@ -63,7 +57,6 @@ run = ['layout tiling', 'move-node-to-workspace 1']
 if.app-id = 'com.spotify.client'
 run = ['layout tiling', 'move-node-to-workspace 6']
 
-# NOTE: machine-specific monitor layout; adjust indexes via `aerospace list-monitors`.
 [workspace-to-monitor-force-assignment]
     1 = 'main'
     2 = 'main'

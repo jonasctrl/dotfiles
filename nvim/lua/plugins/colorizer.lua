@@ -1,4 +1,3 @@
--- NOTE: Plugin that allows color codes to be highlighted in the editor
 return {
     "catgoose/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },

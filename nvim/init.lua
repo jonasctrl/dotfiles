@@ -1,11 +1,8 @@
--- Enable Lua module caching (Neovim 0.9+)
 vim.loader.enable()
 
--- Set leader key before lazy.nvim loads
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 ---@diagnostic disable-next-line: undefined-field
 if not vim.uv.fs_stat(lazypath) then
@@ -27,12 +24,10 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load core configuration
 require("vim-keybinds")
 require("vim-options")
 require("vim-diagnostic")
 
--- Setup lazy.nvim
 require("lazy").setup({
     spec = {
         { import = "plugins" },

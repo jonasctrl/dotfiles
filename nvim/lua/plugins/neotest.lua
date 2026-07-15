@@ -21,8 +21,6 @@ return {
         return {
             adapters = {
                 require("neotest-golang")({
-                    -- runner = "gotestsum", -- recommended (more reliable JSON parsing);
-                    -- requires: go install gotest.tools/gotestsum@latest
                     go_test_args = { "-v", "-count=1", "-race" },
                     warn_test_name_dupes = false,
                 }),

@@ -44,7 +44,7 @@ return {
                 end,
             })
 
-            -- Enable treesitter indentation (skip python)
+            -- Enable treesitter indentation
             vim.api.nvim_create_autocmd("FileType", {
                 callback = function(args)
                     if vim.bo[args.buf].filetype == "python" then return end

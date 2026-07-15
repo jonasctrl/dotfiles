@@ -23,6 +23,25 @@ return {
             },
             sources = {
                 files = { hidden = true, ignored = false },
+
+                -- Literal search by default
+                grep = {
+                    regex = false,
+                    actions = {
+                        toggle_regex = function(picker)
+                            picker.opts.regex = not picker.opts.regex
+                            vim.notify("Grep regex: " .. (picker.opts.regex and "ON" or "OFF"))
+                            picker:find()
+                        end,
+                    },
+                    win = {
+                        input = {
+                            keys = {
+                                ["<a-r>"] = { "toggle_regex", mode = { "i", "n" }, desc = "Toggle regex" },
+                            },
+                        },
+                    },
+                },
             },
         },
         quickfile = { enabled = true },

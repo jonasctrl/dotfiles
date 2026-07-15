@@ -68,7 +68,6 @@ return {
                 end,
             })
 
-            -- Vue support: vtsls + @vue/typescript-plugin for .vue import resolution in TS files
             vim.lsp.config("vtsls", {
                 filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "vue" },
                 settings = {
