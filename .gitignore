@@ -12,6 +12,7 @@
 !claude/
 !nix/
 !mise/
+!zsa/
 
 !nix/**/*
 nix/local.nix
@@ -21,6 +22,7 @@ nix/local.nix
 !nvim/**/*
 !aerospace/**/*
 !ghostty/**/*
+!zsa/**/*
 
 !**/*.sh
 .DS_Store
