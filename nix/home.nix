@@ -43,18 +43,13 @@
     poetry
     pnpm
     nh
+    zsh-autosuggestions
+    zsh-fzf-tab
   ];
 
   home.sessionVariables = {
-    XDG_CONFIG_HOME = "$HOME/.config";
-    GOPATH = "$HOME/go";
     NH_DARWIN_FLAKE = "$HOME/.config#darwin";
   };
-
-  home.sessionPath = [
-    "$HOME/go/bin"
-    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-  ];
 
   programs.git = {
     enable = true;

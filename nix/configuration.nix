@@ -26,5 +26,8 @@
   programs.zsh.enable = true;
   programs.zsh.enableGlobalCompInit = false;
 
+  # Expose zsh plugin files in /etc/profiles/per-user/<user>/share.
+  environment.pathsToLink = [ "/share/fzf" "/share/fzf-tab" ];
+
   security.pam.services.sudo_local.touchIdAuth = true;
 }

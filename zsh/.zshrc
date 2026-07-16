@@ -12,9 +12,22 @@ fi
 
 setopt INC_APPEND_HISTORY
 
+# NOTE: Plugins are found wherever they are installed.
+_source_first() {
+  local f
+  for f in "$@"; do
+    [[ -r "$f" ]] && { source "$f"; return 0; }
+  done
+  return 1
+}
+_nix_share="/etc/profiles/per-user/$USER/share"
+_brew_share="/opt/homebrew/share"
+
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-source "$ZSH_AUTOSUGGESTIONS_SRC"
+_source_first \
+  "$_nix_share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" \
+  "$_brew_share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 autoload -Uz compinit
 _comp_dump="${ZDOTDIR:-$HOME}/.zcompdump-$ZSH_VERSION"
@@ -40,10 +53,17 @@ source "$HOME/.config/zsh/.zsh_profile"
 eval "$(mise activate zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 
-source "$FZF_SHARE/key-bindings.zsh"
+_source_first \
+  "$_nix_share/fzf/key-bindings.zsh" \
+  "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 bindkey -r '\ec'
 bindkey -r '^T'
 
-source "$FZF_TAB_SRC"
+_source_first \
+  "$_nix_share/fzf-tab/fzf-tab.plugin.zsh" \
+  "$_brew_share/fzf-tab/fzf-tab.plugin.zsh"
 
-_zsh_autosuggest_bind_widgets
+(( $+functions[_zsh_autosuggest_bind_widgets] )) && _zsh_autosuggest_bind_widgets
+
+unset -f _source_first
+unset _nix_share _brew_share
