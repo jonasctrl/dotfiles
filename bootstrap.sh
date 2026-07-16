@@ -20,13 +20,19 @@ for f in bashrc zprofile zshrc nix/nix.conf; do
     [ -e "/etc/$f" ] && [ ! -L "/etc/$f" ] && sudo mv "/etc/$f" "/etc/$f.before-nix-darwin"
 done
 
-if [ ! -f "$HOME/.config/nix/local.nix" ] || grep -q '= ""' "$HOME/.config/nix/local.nix"; then
-    echo "Fill in nix/local.nix (user/gitName/gitEmail), git add it, and re-run."
+if [ ! -f "$HOME/.config/nix/local.nix" ]; then
+    printf '{\n  user = "%s";\n  gitName = "";\n  gitEmail = "";\n}\n' "$(whoami)" >"$HOME/.config/nix/local.nix"
+    echo "Created nix/local.nix from whoami; fill in gitName/gitEmail and re-run."
+    exit 1
+fi
+
+if grep -q '= ""' "$HOME/.config/nix/local.nix"; then
+    echo "nix/local.nix has empty fields; fill in gitName/gitEmail and re-run."
     exit 1
 fi
 
 /nix/var/nix/profiles/default/bin/nix --extra-experimental-features "nix-command flakes" \
-    build "$FLAKE#darwinConfigurations.darwin.system" --out-link /tmp/bootstrap-system
-sudo /tmp/bootstrap-system/sw/bin/darwin-rebuild switch --flake "$FLAKE#darwin"
+    build "$FLAKE#darwinConfigurations.darwin.system" --impure --out-link /tmp/bootstrap-system
+sudo env HOME="$HOME" /tmp/bootstrap-system/sw/bin/darwin-rebuild switch --flake "$FLAKE#darwin" --impure
 
 "/etc/profiles/per-user/$(whoami)/bin/mise" install

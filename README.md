@@ -2,9 +2,9 @@
 
 macOS config via nix-darwin + home-manager + nix-homebrew.
 
-Apply change with:
+Apply changes:
 ```
-nh darwin switch
+nh darwin switch -- --impure
 ```
 
 Bootstrap nix-darwin and home-manager with:

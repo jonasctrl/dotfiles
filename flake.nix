@@ -13,9 +13,12 @@
 
   outputs = { nix-darwin, home-manager, nix-homebrew, ... }:
     let
+      home = builtins.getEnv "HOME";
+      localPath = /. + "${home}/.config/nix/local.nix";
       local =
-        if builtins.pathExists ./nix/local.nix then import ./nix/local.nix
-        else throw "nix/local.nix is missing or not tracked by git - create it and git add it";
+        if home == "" then throw "nix/local.nix is untracked; evaluate with --impure (nh darwin switch -- --impure)"
+        else if !builtins.pathExists localPath then throw "${toString localPath} is missing - copy nix/local.nix.example to nix/local.nix and fill it in"
+        else import localPath;
       user = local.user;
     in
     {
