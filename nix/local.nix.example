@@ -1,4 +1,3 @@
-# Copy to local.nix.
 {
   user = "macos-username";
   gitName = "Your Name";

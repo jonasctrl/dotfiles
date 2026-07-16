@@ -48,7 +48,7 @@
   home.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     GOPATH = "$HOME/go";
-    NH_DARWIN_FLAKE = "path:$HOME/.config/nix#darwin";
+    NH_DARWIN_FLAKE = "$HOME/.config#darwin";
   };
 
   home.sessionPath = [

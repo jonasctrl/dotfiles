@@ -5,17 +5,20 @@
 !agents/
 !agents/AGENTS.md
 
+!flake.nix
+!flake.lock
+!nix/
+!nix/**/*
+
 !nvim/
 !aerospace/
 !ghostty/
 !tmux/
 !claude/
-!nix/
 !mise/
 !zsa/
+!zsh/
 
-!nix/**/*
-nix/local.nix
 !claude/settings.json
 !mise/config.toml
 !tmux/tmux.conf
@@ -23,6 +26,8 @@ nix/local.nix
 !aerospace/**/*
 !ghostty/**/*
 !zsa/**/*
+!zsh/**/*
+zsh/.zshenv_private
 
 !**/*.sh
 .DS_Store

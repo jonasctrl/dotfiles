@@ -1,0 +1,5 @@
+alias reload="exec zsh"
+alias ls='ls --color=auto'
+alias ll='ls -lah --color=auto'
+alias grep='grep --color=auto'
+alias glog='git log --pretty=format:"%h - %an, %ar : %s" --abbrev-commit'

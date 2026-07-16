@@ -4,7 +4,7 @@ macOS config via nix-darwin + home-manager + nix-homebrew.
 
 Apply change with:
 ```
-~/.config/rebuild.sh
+nh darwin switch
 ```
 
 Bootstrap nix-darwin and home-manager with:
