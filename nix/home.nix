@@ -55,6 +55,8 @@
     enable = true;
     settings.user.name = local.gitName;
     settings.user.email = local.gitEmail;
+    settings.core.editor = "vim";
+    settings.pull.rebase = false;
     ignores = [
       ".DS_Store"
       "._*"
