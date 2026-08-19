@@ -3,6 +3,7 @@
 - Never use the em dash "—" in anything you write: chat, code, comments, docs,
   commit messages. Use a plain dash "-" instead. Do not rewrite em dashes in
   existing files unless asked to.
+- When writing commit messages, NEVER auto-add your agent name as co-author.
 - Never manually modify any files that are marked as auto-generated.
 - Optimize for the code's lifetime: build for what exists now, not for
   hypothetical future needs, and never pick a worse design because it is

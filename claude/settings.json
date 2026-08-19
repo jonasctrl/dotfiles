@@ -1,5 +1,4 @@
 {
-  "model": "claude-fable-5[1m]",
   "attribution": {
     "commit": "",
     "pr": ""
@@ -14,6 +13,7 @@
       "Bash(* --version)"
     ]
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PostToolUse": [
       {
@@ -30,7 +30,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "jq -r '\"[\\(.model.display_name)] ctx: \\(.context_window.remaining_percentage // 100 | floor)% left | 5h: \\(100 - (.rate_limits.five_hour.used_percentage // 0) | floor)% left | 7d: \\(100 - (.rate_limits.seven_day.used_percentage // 0) | floor)% left | $\\(.cost.total_cost_usd // 0 | tostring | .[0:5])\"'"
+    "command": "jq -r '(.effort.level // \"\" | if . == \"\" then \"\" else \" \" + . end) as $eff | (.rate_limits.five_hour.resets_at | if . then strflocaltime(\" (%H:%M)\") else \"\" end) as $t5 | (.rate_limits.seven_day.resets_at | if . then strflocaltime(\" (%a %H:%M)\") else \"\" end) as $t7 | ((.cost.total_cost_usd // 0) * 100 | round / 100) as $cost | \"[\\(.model.display_name)\\($eff)] ctx: \\(.context_window.remaining_percentage // 100 | floor)% left | 5h: \\(100 - (.rate_limits.five_hour.used_percentage // 0) | floor)% left\\($t5) | 7d: \\(100 - (.rate_limits.seven_day.used_percentage // 0) | floor)% left\\($t7) | $\\($cost)\"'"
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
