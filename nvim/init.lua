@@ -24,9 +24,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("vim-keybinds")
 require("vim-options")
-require("vim-diagnostic")
 
 require("lazy").setup({
     spec = {

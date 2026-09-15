@@ -7,7 +7,7 @@ return {
     opts = {
         bigfile = { enabled = true },
         dashboard = { enabled = false },
-        explorer = { enabled = false },
+        explorer = { enabled = true },
         indent = { enabled = false },
         input = { enabled = false },
         notifier = { enabled = false },
@@ -23,6 +23,12 @@ return {
             },
             sources = {
                 files = { hidden = true, ignored = false },
+
+                explorer = {
+                    hidden = true,
+                    ignored = true,
+                    layout = { preset = "sidebar", preview = false, layout = { width = 35 } },
+                },
 
                 -- Literal search by default
                 grep = {
@@ -51,6 +57,8 @@ return {
         words = { enabled = false },
     },
     keys = {
+        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+
         -- Top pickers
         { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -66,6 +74,7 @@ return {
         -- Git
         { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
         { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+        { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Hunks" },
         { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
 
         -- Grep

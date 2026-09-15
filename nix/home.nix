@@ -28,8 +28,6 @@
     graphviz
     nmap
     xh
-    go
-    golangci-lint
     gotools
     delve
     shfmt

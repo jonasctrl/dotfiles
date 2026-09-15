@@ -32,6 +32,9 @@ return {
             map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff against ~")
             map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle blame")
 
+            -- Fills the quickfix list and allows to step through with the built-in ]q / [q
+            map("n", "<leader>hq", function() gs.setqflist("all") end, "All hunks to quickfix")
+
             -- Open blame commit in browser (uses gitsigns blame data)
             map("n", "<leader>ho", function()
                 local blame = vim.b.gitsigns_blame_line_dict

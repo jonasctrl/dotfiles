@@ -28,3 +28,18 @@ vim.opt.timeoutlen = 300
 
 vim.opt.undofile = true
 vim.opt.spell = false
+
+vim.keymap.set("n", "q:", "<nop>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+vim.diagnostic.config({
+    virtual_text = {
+        source = "if_many",
+        prefix = "",
+        severity = { min = vim.diagnostic.severity.WARN },
+    },
+    signs = false,
+    underline = false,
+    update_in_insert = false,
+    severity_sort = true,
+})
