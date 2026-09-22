@@ -29,7 +29,9 @@ vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.spell = false
 
-vim.keymap.set("n", "q:", "<nop>")
+-- q: q/ q? and <C-f> from the cmdline all open the command-line window.
+vim.api.nvim_create_autocmd("CmdwinEnter", { command = "quit" })
+
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.diagnostic.config({

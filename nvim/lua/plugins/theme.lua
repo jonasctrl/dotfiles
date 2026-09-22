@@ -73,9 +73,6 @@ local function custom_monokai()
     hl(0, "SnacksPickerPathHidden", { fg = "#6e6e6e" })
 
     hl(0, "GitSignsCurrentLineBlame", { fg = "#6e6e6e", italic = true })
-
-    hl(0, "GitSignsAddPreview", { bg = "#3a4424" })
-    hl(0, "GitSignsDeletePreview", { bg = "#47282e" })
 end
 
 return {

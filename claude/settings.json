@@ -11,9 +11,9 @@
       "Bash(gofmt *)",
       "Bash(git fetch *)",
       "Bash(* --version)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "hooks": {
     "PostToolUse": [
       {
@@ -37,6 +37,7 @@
     "context7@claude-plugins-official": true
   },
   "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"

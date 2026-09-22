@@ -38,6 +38,7 @@
       "nats-io/nats-tools/nats"
       "redis"
       "datawire/blackbird/telepresence"
+      "yazi"
     ];
 
     casks = [
@@ -45,7 +46,6 @@
       "android-studio"
       "bitwarden"
       "bruno"
-      "claude-code@latest"
       "copilot-cli"
       "dbeaver-community"
       "font-meslo-lg-nerd-font"

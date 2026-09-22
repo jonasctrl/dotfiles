@@ -6,8 +6,10 @@ typeset -U PATH path
 path=("$HOME/.local/share/mise/shims" $path)
 
 export XDG_CONFIG_HOME="$HOME/.config"
+export EDITOR="nvim"
 export GOPATH="$HOME/go"
 path=("$HOME/go/bin" $path)
+path=("$HOME/.local/bin" $path)
 path+=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin")
 
 ENV_PRIVATE_PATH="$HOME/.config/zsh/.zshenv_private"

@@ -12,15 +12,7 @@ return {
         input = { enabled = false },
         notifier = { enabled = false },
         picker = {
-            icons = {
-                git = { enabled = false },
-                diagnostics = {
-                    Error = "E ",
-                    Warn = "W ",
-                    Hint = "H ",
-                    Info = "I ",
-                },
-            },
+            icons = { git = { enabled = false } },
             sources = {
                 files = { hidden = true, ignored = false },
 
@@ -28,6 +20,16 @@ return {
                     hidden = true,
                     ignored = true,
                     layout = { preset = "sidebar", preview = false, layout = { width = 35 } },
+
+                    actions = {
+                        explorer_add = function(picker)
+                            local input = Snacks.input
+                            ---@diagnostic disable-next-line: assign-type-mismatch
+                            Snacks.input = vim.ui.input
+                            require("snacks.explorer.actions").actions.explorer_add(picker)
+                            Snacks.input = input
+                        end,
+                    },
                 },
 
                 -- Literal search by default
@@ -101,6 +103,5 @@ return {
         { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
         { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
         { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-        { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     },
 }

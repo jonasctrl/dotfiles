@@ -14,7 +14,6 @@
     zoxide
     bat
     gh
-    lazygit
     lazydocker
     neovim
     tree-sitter
