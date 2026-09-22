@@ -6,8 +6,6 @@ return {
         lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter").setup({})
-
             require("nvim-treesitter").install({
                 "bash",
                 "css",
@@ -64,12 +62,10 @@ return {
     -- Show code context at the top of the window
     {
         "nvim-treesitter/nvim-treesitter-context",
-        enabled = true,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             max_lines = 3,
             multiline_threshold = 1,
-            separator = nil,
         },
         keys = {
             { "[c", function() require("treesitter-context").go_to_context() end, desc = "Go to context" },

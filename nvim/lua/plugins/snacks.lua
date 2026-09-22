@@ -2,15 +2,10 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    ---@diagnostic disable-next-line: undefined-doc-name
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
-        dashboard = { enabled = false },
         explorer = { enabled = true },
-        indent = { enabled = false },
-        input = { enabled = false },
-        notifier = { enabled = false },
         picker = {
             icons = { git = { enabled = false } },
             sources = {
@@ -19,12 +14,12 @@ return {
                 explorer = {
                     hidden = true,
                     ignored = true,
+                    ---@diagnostic disable-next-line: assign-type-mismatch
                     layout = { preset = "sidebar", preview = false, layout = { width = 35 } },
 
                     actions = {
                         explorer_add = function(picker)
                             local input = Snacks.input
-                            ---@diagnostic disable-next-line: assign-type-mismatch
                             Snacks.input = vim.ui.input
                             require("snacks.explorer.actions").actions.explorer_add(picker)
                             Snacks.input = input
@@ -33,30 +28,10 @@ return {
                 },
 
                 -- Literal search by default
-                grep = {
-                    regex = false,
-                    actions = {
-                        toggle_regex = function(picker)
-                            picker.opts.regex = not picker.opts.regex
-                            vim.notify("Grep regex: " .. (picker.opts.regex and "ON" or "OFF"))
-                            picker:find()
-                        end,
-                    },
-                    win = {
-                        input = {
-                            keys = {
-                                ["<a-r>"] = { "toggle_regex", mode = { "i", "n" }, desc = "Toggle regex" },
-                            },
-                        },
-                    },
-                },
+                grep = { regex = false },
             },
         },
         quickfile = { enabled = true },
-        scope = { enabled = false },
-        scroll = { enabled = false },
-        statuscolumn = { enabled = false },
-        words = { enabled = false },
     },
     keys = {
         { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
@@ -67,7 +42,6 @@ return {
         { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 
         -- Find
-        { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
         { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
         { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },

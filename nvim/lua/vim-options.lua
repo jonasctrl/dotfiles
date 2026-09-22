@@ -11,7 +11,6 @@ vim.opt.showtabline = 0
 vim.opt.winborder = "rounded"
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
-vim.opt.cursorline = false
 vim.opt.showmode = false
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
@@ -27,7 +26,6 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 vim.opt.undofile = true
-vim.opt.spell = false
 
 -- q: q/ q? and <C-f> from the cmdline all open the command-line window.
 vim.api.nvim_create_autocmd("CmdwinEnter", { command = "quit" })
@@ -42,6 +40,5 @@ vim.diagnostic.config({
     },
     signs = false,
     underline = false,
-    update_in_insert = false,
     severity_sort = true,
 })

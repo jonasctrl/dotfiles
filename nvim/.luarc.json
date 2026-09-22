@@ -5,12 +5,12 @@
   },
   "workspace": {
     "library": [
-      "${3rd}/luv/library"
+      "$VIMRUNTIME",
+      "${env:HOME}/.local/share/nvim/lazy/snacks.nvim"
     ],
     "checkThirdParty": false
   },
   "diagnostics": {
-    "globals": ["vim", "Snacks"],
     "disable": ["missing-fields"]
   },
   "hint": {

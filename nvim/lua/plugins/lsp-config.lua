@@ -22,7 +22,6 @@ end
 return {
     {
         "mason-org/mason.nvim",
-        cmd = { "Mason", "MasonInstall", "MasonUpdate" },
         build = ":MasonUpdate",
         opts = {},
     },
@@ -51,14 +50,10 @@ return {
     {
         "neovim/nvim-lspconfig",
         lazy = false,
-        dependencies = {
-            "mason-org/mason-lspconfig.nvim",
-            "saghen/blink.cmp",
-        },
+        dependencies = { "mason-org/mason-lspconfig.nvim" },
         config = function()
-            vim.lsp.config("*", {
-                capabilities = require("blink.cmp").get_lsp_capabilities(),
-            })
+            -- colorizer already highlights colors in every filetype
+            vim.lsp.document_color.enable(false)
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
@@ -76,9 +71,9 @@ return {
                             globalPlugins = {
                                 {
                                     name = "@vue/typescript-plugin",
-                                    location = vim.fn.expand("$MASON")
-                                        .. "/packages/vue-language-server/node_modules/@vue/typescript-plugin",
+                                    location = vim.fn.expand("$MASON") .. "/packages/vue-language-server/node_modules/@vue/language-server",
                                     languages = { "vue" },
+                                    configNamespace = "typescript",
                                 },
                             },
                         },
@@ -110,14 +105,12 @@ return {
                 documentation = { auto_show = true, auto_show_delay_ms = 750 },
             },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
                 providers = {
                     buffer = { min_keyword_length = 3 },
                 },
             },
             fuzzy = { implementation = "prefer_rust" },
         },
-        opts_extend = { "sources.default" },
     },
 
     {
@@ -134,7 +127,7 @@ return {
         },
         opts = {
             formatters_by_ft = {
-                go = { "goimports", "gofmt" },
+                go = { "goimports" },
                 lua = { "stylua" },
                 typescript = js_formatter,
                 javascript = js_formatter,
@@ -162,7 +155,6 @@ return {
                 if no_auto_format[vim.bo[bufnr].filetype] then return nil end
                 return { timeout_ms = 1000 }
             end,
-            notify_on_error = true,
         },
         init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
     },

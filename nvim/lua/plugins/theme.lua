@@ -1,5 +1,5 @@
 local function clear_bg(group)
-    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+    local hl = vim.api.nvim_get_hl(0, { name = group, link = false }) --[[@as vim.api.keyset.highlight]]
     hl.bg, hl.ctermbg = "NONE", nil
     vim.api.nvim_set_hl(0, group, hl)
 end

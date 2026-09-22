@@ -1,10 +1,7 @@
-vim.loader.enable()
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
----@diagnostic disable-next-line: undefined-field
 if not vim.uv.fs_stat(lazypath) then
     local out = vim.fn.system({
         "git",
@@ -31,6 +28,5 @@ require("lazy").setup({
         { import = "plugins" },
     },
     install = { colorscheme = { "classic-monokai" } },
-    checker = { enabled = false },
     rocks = { enabled = false },
 })
