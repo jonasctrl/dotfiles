@@ -4,13 +4,9 @@
     "pr": ""
   },
   "permissions": {
-    "allow": [
-      "Bash(go build *)",
-      "Bash(go test *)",
-      "Bash(go vet *)",
-      "Bash(gofmt *)",
-      "Bash(git fetch *)",
-      "Bash(* --version)"
+    "ask": [
+      "Bash(git push *)",
+      "Bash(gh pr create *)"
     ],
     "defaultMode": "auto"
   },
@@ -48,6 +44,5 @@
     "enabled": true,
     "mode": "hold"
   },
-  "skipWorkflowUsageWarning": false,
   "theme": "dark-ansi"
 }

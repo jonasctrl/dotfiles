@@ -11,7 +11,7 @@
   pick the one easier to understand and change in a year.
 - When you rename something, update every comment, doc, and test name that
   still mentions the old name.
-- Match the length and density of the surrounding text you are adding to. 
+- Match the length and density of the surrounding text you are adding to.
   Do not restate what the surrounding code or spec already declares.
 - Default to no comment. Write one only for what the code cannot say: why a
   choice was made, a non-obvious constraint, a workaround and its cause. If
