@@ -19,6 +19,9 @@
 
     finder.FXPreferredViewStyle = "Nlsv";
 
+    # One Space across all displays; AeroSpace is more stable on multiple monitors.
+    spaces.spans-displays = true;
+
     controlcenter.BatteryShowPercentage = true;
 
     WindowManager = {

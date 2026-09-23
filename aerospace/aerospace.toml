@@ -4,19 +4,11 @@ persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 start-at-login = true
 
-enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = true
-
 accordion-padding = 6
-default-root-container-layout = 'tiles'
-default-root-container-orientation = 'auto'
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 automatically-unhide-macos-hidden-apps = true
-
-[key-mapping]
-    preset = 'qwerty'
 
 [gaps]
     inner.horizontal = 16
@@ -66,7 +58,7 @@ run = ['layout tiling', 'move-node-to-workspace 6']
     6 = 'main'
     7 = 1  # external
     8 = 3  # external
-    9 = 2  # built-in
+    9 = 'built-in'
 
 [mode.main.binding]
     alt-enter = 'exec-and-forget open -na Ghostty'
@@ -78,7 +70,7 @@ run = ['layout tiling', 'move-node-to-workspace 6']
     alt-j = 'focus down'
     alt-k = 'focus up'
     alt-l = 'focus right'
-    alt-f = 'fullscreen'
+    alt-shift-f = 'fullscreen'
     alt-s = 'layout accordion vertical'
     alt-n = 'focus dfs-next'
     alt-p = 'focus dfs-prev'
@@ -119,7 +111,6 @@ run = ['layout tiling', 'move-node-to-workspace 6']
     alt-shift-9 = 'move-node-to-workspace 9'
 
     alt-tab = 'workspace-back-and-forth'
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     alt-shift-semicolon = 'mode service'
 

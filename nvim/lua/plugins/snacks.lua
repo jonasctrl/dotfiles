@@ -7,7 +7,10 @@ return {
         bigfile = { enabled = true },
         explorer = { enabled = true },
         picker = {
-            icons = { git = { enabled = false } },
+            icons = {
+                git = { enabled = false },
+                diagnostics = { Error = "E ", Warn = "W ", Hint = "H ", Info = "I " },
+            },
             sources = {
                 files = { hidden = true, ignored = false },
 
