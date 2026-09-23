@@ -36,6 +36,10 @@ else
 fi
 unset _comp_files _comp_dump
 setopt COMPLETE_ALIASES COMPLETE_IN_WORD ALWAYS_TO_END
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*:descriptions' format '[%d]'
+# NOTE: No zsh menu, so fzf-tab can insert the common prefix first.
+zstyle ':completion:*' menu no
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git

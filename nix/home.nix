@@ -22,13 +22,10 @@
     k9s
     btop
     htop
-    most
     imagemagick
     graphviz
     nmap
     xh
-    gotools
-    delve
     shfmt
     semgrep
     jq
@@ -40,6 +37,7 @@
     poetry
     pnpm
     nh
+    yazi
     zsh-autosuggestions
     zsh-fzf-tab
   ];
@@ -52,8 +50,10 @@
     enable = true;
     settings.user.name = local.gitName;
     settings.user.email = local.gitEmail;
-    settings.core.editor = "vim";
     settings.pull.rebase = false;
+    settings.push.autoSetupRemote = true;
+    settings.fetch.prune = true;
+    settings.merge.conflictStyle = "zdiff3";
     ignores = [
       ".DS_Store"
       "._*"

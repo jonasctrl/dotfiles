@@ -35,7 +35,6 @@ return {
                 "bashls",
                 "cssls",
                 "eslint",
-                "gopls",
                 "html",
                 "lua_ls",
                 "marksman",

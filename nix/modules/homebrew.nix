@@ -4,16 +4,19 @@
   nix-homebrew = {
     enable = true;
     inherit user;
-    enableRosetta = true;
     autoMigrate = true;
+    enableZshIntegration = false;
   };
 
   homebrew = {
     enable = true;
     onActivation = {
       cleanup = "zap";
-      autoUpdate = false;
-      upgrade = false;
+      # IMPORTANT: Brew is not snapshotted; every switch updates and upgrades to latest.
+      autoUpdate = true;
+      upgrade = true;
+      # Activation drops XDG_CONFIG_HOME, which splits brew tap trust between two files.
+      extraEnv.XDG_CONFIG_HOME = "/Users/${user}/.config";
     };
 
     taps = [
@@ -38,7 +41,6 @@
       "nats-io/nats-tools/nats"
       "redis"
       "datawire/blackbird/telepresence"
-      "yazi"
     ];
 
     casks = [
