@@ -18,6 +18,7 @@ nix/local.nix
 !claude/
 !mise/
 !zsa/
+!yazi/
 !zsh/
 
 !claude/settings.json
@@ -27,6 +28,7 @@ nix/local.nix
 !aerospace/**/*
 !ghostty/**/*
 !zsa/**/*
+!yazi/**/*
 !zsh/**/*
 zsh/.zshenv_private
 

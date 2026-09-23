@@ -36,13 +36,14 @@
     "gopls-lsp@claude-plugins-official": true,
     "context7@claude-plugins-official": true
   },
+  "outputStyle": "Concise",
   "effortLevel": "xhigh",
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
     }
   },
-  "tui": "fullscreen",
+  "tui": "default",
   "voice": {
     "enabled": true,
     "mode": "hold"
