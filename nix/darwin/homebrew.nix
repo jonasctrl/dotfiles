@@ -1,4 +1,4 @@
-{ user, ... }:
+{ config, user, ... }:
 
 {
   nix-homebrew = {
@@ -16,7 +16,7 @@
       autoUpdate = true;
       upgrade = true;
       # Activation drops XDG_CONFIG_HOME, which splits brew tap trust between two files.
-      extraEnv.XDG_CONFIG_HOME = "/Users/${user}/.config";
+      extraEnv.XDG_CONFIG_HOME = "${config.users.users.${user}.home}/.config";
     };
 
     taps = [

@@ -25,19 +25,12 @@
       darwinConfigurations."darwin" = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit user local; };
         modules = [
-          ./nix/configuration.nix
+          ./nix/darwin
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
 
           nix-homebrew.darwinModules.nix-homebrew
 
           home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "hm-backup";
-            home-manager.extraSpecialArgs = { inherit user local; };
-            home-manager.users.${user} = import ./nix/home.nix;
-          }
         ];
       };
     };

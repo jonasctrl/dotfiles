@@ -1,9 +1,9 @@
-{ user, ... }:
+{ user, local, ... }:
 
 {
   imports = [
-    ./modules/homebrew.nix
-    ./modules/macos-defaults.nix
+    ./homebrew.nix
+    ./macos-defaults.nix
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -12,6 +12,13 @@
 
   system.primaryUser = user;
   users.users.${user}.home = "/Users/${user}";
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "hm-backup";
+  home-manager.overwriteBackup = true;
+  home-manager.extraSpecialArgs = { inherit local; };
+  home-manager.users.${user} = import ../home;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.channel.enable = false;

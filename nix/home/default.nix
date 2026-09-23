@@ -1,10 +1,8 @@
-{ config, lib, pkgs, user, local, ... }:
+{ config, lib, pkgs, local, ... }:
 
 {
-  imports = [ ./modules/zsh.nix ];
+  imports = [ ./zsh.nix ];
 
-  home.username = user;
-  home.homeDirectory = "/Users/${user}";
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
@@ -69,16 +67,16 @@
   };
 
   home.file.".claude/settings.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/claude/settings.json";
+    config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/claude/settings.json";
 
   home.file.".claude/CLAUDE.md".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/agents/AGENTS.md";
+    config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/agents/AGENTS.md";
 
   home.activation.tmuxPlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     TPM_DIR="$HOME/.config/tmux/plugins/tpm"
     if [ ! -d "$TPM_DIR" ]; then
-      ${pkgs.git}/bin/git clone --depth 1 https://github.com/tmux-plugins/tpm "$TPM_DIR" \
-        && TERM=xterm-256color PATH="${pkgs.tmux}/bin:$PATH" "$TPM_DIR/bin/install_plugins" \
+      run ${pkgs.git}/bin/git clone --depth 1 https://github.com/tmux-plugins/tpm "$TPM_DIR" \
+        && run env TERM=xterm-256color PATH="${pkgs.tmux}/bin:$PATH" "$TPM_DIR/bin/install_plugins" \
         || echo "tmux TPM bootstrap incomplete; run 'prefix + I' in tmux later"
     fi
   '';

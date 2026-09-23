@@ -30,6 +30,7 @@
     };
 
     CustomUserPreferences = {
+      # Replaces the whole dict: unlisted shortcuts reset to macOS defaults on switch.
       "com.apple.symbolichotkeys".AppleSymbolicHotKeys = {
         # Disable built-in Spotlight.
         "64".enabled = false;
