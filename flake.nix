@@ -11,7 +11,7 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = { nix-darwin, home-manager, nix-homebrew, ... }:
+  outputs = { self, nix-darwin, home-manager, nix-homebrew, ... }:
     let
       home = builtins.getEnv "HOME";
       localPath = /. + "${home}/.config/nix/local.nix";
@@ -26,6 +26,7 @@
         specialArgs = { inherit user local; };
         modules = [
           ./nix/configuration.nix
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
 
           nix-homebrew.darwinModules.nix-homebrew
 
