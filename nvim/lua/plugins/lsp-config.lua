@@ -79,6 +79,9 @@ return {
                     },
                 },
             })
+
+            -- installed by mise, so mason-lspconfig does not enable it
+            vim.lsp.enable("gopls")
         end,
     },
 
